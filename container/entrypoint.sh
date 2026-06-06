@@ -11,6 +11,10 @@
 
 set -e
 
+# Register Claude Code hooks for pre-turn recall and post-turn memory storage.
+# Idempotent — safe to run on every container start.
+mnemon setup --target claude-code --yes --global >/dev/stderr 2>&1
+
 cat > /tmp/input.json
 
 exec bun run /app/src/index.ts < /tmp/input.json
