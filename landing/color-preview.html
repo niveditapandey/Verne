@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Verne — Colour Direction Samples</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=IBM+Plex+Mono:wght@400;500&family=Source+Sans+3:wght@300;400&display=swap" rel="stylesheet">
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+body { background:#111; font-family: 'Source Sans 3', sans-serif; padding: 40px 24px; }
+h1 { font-family: 'IBM Plex Mono', monospace; color:#888; font-size:13px; letter-spacing:0.2em; text-transform:uppercase; margin-bottom:40px; text-align:center; }
+
+.grid { display:grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap:28px; max-width:1200px; margin:0 auto; }
+
+.swatch {
+  border-radius: 8px;
+  overflow: hidden;
+  position: relative;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+.swatch:hover { transform: translateY(-4px); }
+
+.swatch-hero {
+  padding: 36px 32px 28px;
+  min-height: 280px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  position: relative;
+}
+.swatch-label {
+  position: absolute;
+  top: 14px; right: 14px;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  padding: 5px 10px;
+  border-radius: 999px;
+  text-transform: uppercase;
+}
+.swatch-name {
+  font-family: 'Playfair Display', serif;
+  font-size: 54px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  line-height: 1;
+  margin-bottom: 8px;
+}
+.swatch-tag {
+  font-family: 'Playfair Display', serif;
+  font-style: italic;
+  font-size: 15px;
+  margin-bottom: 16px;
+}
+.swatch-badge {
+  display: inline-block;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.04em;
+  padding: 5px 12px;
+  border-radius: 999px;
+  margin-right: 6px;
+  margin-top: 4px;
+}
+.swatch-foot {
+  padding: 16px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.swatch-foot-name {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 12px;
+  letter-spacing: 0.12em;
+  font-weight: 500;
+}
+.dot-row { display: flex; gap: 8px; }
+.dot { width: 18px; height: 18px; border-radius: 50%; border: 1px solid rgba(255,255,255,0.15); }
+
+
+/* ── 1. CURRENT: Deep Navy + Brass ─────────────────────── */
+.c1 .swatch-hero {
+  background: radial-gradient(ellipse 80% 60% at 70% 20%, rgba(46,111,108,0.2),transparent 60%), #0e1a2b;
+}
+.c1 .swatch-name  { color: #f3ead7; }
+.c1 .swatch-tag   { color: #c9a050; }
+.c1 .swatch-badge { background: rgba(201,160,80,0.1); border: 1px solid rgba(201,160,80,0.4); color: #c9a050; }
+.c1 .swatch-label { background: rgba(201,160,80,0.15); color: #c9a050; border: 1px solid rgba(201,160,80,0.3); }
+.c1 .swatch-foot  { background: #0a1220; }
+.c1 .swatch-foot-name { color: #c9a050; }
+
+/* ── 2. SUBMARINE: Black + Electric Teal ────────────────── */
+.c2 .swatch-hero {
+  background: radial-gradient(ellipse 60% 50% at 30% 70%, rgba(0,200,180,0.12), transparent 60%), #05080c;
+}
+.c2 .swatch-name  { color: #e0faf7; }
+.c2 .swatch-tag   { color: #00c8b4; }
+.c2 .swatch-badge { background: rgba(0,200,180,0.08); border: 1px solid rgba(0,200,180,0.35); color: #00c8b4; }
+.c2 .swatch-label { background: rgba(0,200,180,0.1); color: #00c8b4; border: 1px solid rgba(0,200,180,0.3); }
+.c2 .swatch-foot  { background: #030507; }
+.c2 .swatch-foot-name { color: #00c8b4; }
+
+/* ── 3. PARCHMENT: Light / Inverted ─────────────────────── */
+.c3 .swatch-hero {
+  background: radial-gradient(ellipse 70% 50% at 60% 30%, rgba(164,80,46,0.08), transparent), #f0e6ce;
+}
+.c3 .swatch-name  { color: #1a0f06; }
+.c3 .swatch-tag   { color: #8b4513; }
+.c3 .swatch-badge { background: rgba(139,69,19,0.08); border: 1px solid rgba(139,69,19,0.3); color: #8b4513; }
+.c3 .swatch-label { background: rgba(139,69,19,0.1); color: #8b4513; border: 1px solid rgba(139,69,19,0.25); }
+.c3 .swatch-foot  { background: #e0d3b5; }
+.c3 .swatch-foot-name { color: #8b4513; }
+
+/* ── 4. CRIMSON DEEP: Navy + Crimson red ────────────────── */
+.c4 .swatch-hero {
+  background: radial-gradient(ellipse 65% 55% at 75% 25%, rgba(180,30,50,0.18), transparent 60%), #0d1521;
+}
+.c4 .swatch-name  { color: #f5eee6; }
+.c4 .swatch-tag   { color: #d94050; }
+.c4 .swatch-badge { background: rgba(217,64,80,0.1); border: 1px solid rgba(217,64,80,0.35); color: #d94050; }
+.c4 .swatch-label { background: rgba(217,64,80,0.12); color: #d94050; border: 1px solid rgba(217,64,80,0.3); }
+.c4 .swatch-foot  { background: #080e18; }
+.c4 .swatch-foot-name { color: #d94050; }
+
+/* ── 5. VERDIGRIS: Forest + Copper ─────────────────────── */
+.c5 .swatch-hero {
+  background: radial-gradient(ellipse 70% 60% at 40% 60%, rgba(201,130,50,0.12), transparent 55%), #0b1a14;
+}
+.c5 .swatch-name  { color: #e8f0e4; }
+.c5 .swatch-tag   { color: #c98232; }
+.c5 .swatch-badge { background: rgba(201,130,50,0.1); border: 1px solid rgba(201,130,50,0.35); color: #c98232; }
+.c5 .swatch-label { background: rgba(201,130,50,0.1); color: #c98232; border: 1px solid rgba(201,130,50,0.3); }
+.c5 .swatch-foot  { background: #07110d; }
+.c5 .swatch-foot-name { color: #c98232; }
+
+.current-tag { font-size:10px; background:#333; color:#aaa; padding:2px 8px; border-radius:4px; margin-left:8px; font-family:'IBM Plex Mono',monospace; letter-spacing:0.08em; }
+</style>
+</head>
+<body>
+
+<h1>Verne — Colour Directions &nbsp;·&nbsp; Pick one before I build</h1>
+
+<div class="grid">
+
+  <!-- 1 Current -->
+  <div class="swatch c1">
+    <div class="swatch-hero">
+      <span class="swatch-label">01 · BRASS &amp; NAVY</span>
+      <div class="swatch-name">VERNE</div>
+      <div class="swatch-tag">"An agent for extraordinary voyages."</div>
+      <div>
+        <span class="swatch-badge">Claude Agent SDK</span>
+        <span class="swatch-badge">Knowledge Graph</span>
+        <span class="swatch-badge">Telegram-Native</span>
+      </div>
+    </div>
+    <div class="swatch-foot">
+      <span class="swatch-foot-name">BRASS &amp; NAVY <span class="current-tag">current</span></span>
+      <div class="dot-row">
+        <div class="dot" style="background:#0e1a2b"></div>
+        <div class="dot" style="background:#2e6f6c"></div>
+        <div class="dot" style="background:#c9a050"></div>
+        <div class="dot" style="background:#f3ead7"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 2 Submarine -->
+  <div class="swatch c2">
+    <div class="swatch-hero">
+      <span class="swatch-label">02 · DEEP OCEAN</span>
+      <div class="swatch-name">VERNE</div>
+      <div class="swatch-tag">"An agent for extraordinary voyages."</div>
+      <div>
+        <span class="swatch-badge">Claude Agent SDK</span>
+        <span class="swatch-badge">Knowledge Graph</span>
+        <span class="swatch-badge">Telegram-Native</span>
+      </div>
+    </div>
+    <div class="swatch-foot">
+      <span class="swatch-foot-name">DEEP OCEAN</span>
+      <div class="dot-row">
+        <div class="dot" style="background:#05080c"></div>
+        <div class="dot" style="background:#001a17"></div>
+        <div class="dot" style="background:#00c8b4"></div>
+        <div class="dot" style="background:#e0faf7"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 3 Parchment -->
+  <div class="swatch c3">
+    <div class="swatch-hero">
+      <span class="swatch-label">03 · OLD MAP</span>
+      <div class="swatch-name">VERNE</div>
+      <div class="swatch-tag">"An agent for extraordinary voyages."</div>
+      <div>
+        <span class="swatch-badge">Claude Agent SDK</span>
+        <span class="swatch-badge">Knowledge Graph</span>
+        <span class="swatch-badge">Telegram-Native</span>
+      </div>
+    </div>
+    <div class="swatch-foot">
+      <span class="swatch-foot-name">OLD MAP (light)</span>
+      <div class="dot-row">
+        <div class="dot" style="background:#f0e6ce"></div>
+        <div class="dot" style="background:#ddd0b2"></div>
+        <div class="dot" style="background:#8b4513"></div>
+        <div class="dot" style="background:#1a0f06"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 4 Crimson -->
+  <div class="swatch c4">
+    <div class="swatch-hero">
+      <span class="swatch-label">04 · CRIMSON DEEP</span>
+      <div class="swatch-name">VERNE</div>
+      <div class="swatch-tag">"An agent for extraordinary voyages."</div>
+      <div>
+        <span class="swatch-badge">Claude Agent SDK</span>
+        <span class="swatch-badge">Knowledge Graph</span>
+        <span class="swatch-badge">Telegram-Native</span>
+      </div>
+    </div>
+    <div class="swatch-foot">
+      <span class="swatch-foot-name">CRIMSON DEEP</span>
+      <div class="dot-row">
+        <div class="dot" style="background:#0d1521"></div>
+        <div class="dot" style="background:#1c2535"></div>
+        <div class="dot" style="background:#d94050"></div>
+        <div class="dot" style="background:#f5eee6"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 5 Verdigris -->
+  <div class="swatch c5">
+    <div class="swatch-hero">
+      <span class="swatch-label">05 · VERDIGRIS</span>
+      <div class="swatch-name">VERNE</div>
+      <div class="swatch-tag">"An agent for extraordinary voyages."</div>
+      <div>
+        <span class="swatch-badge">Claude Agent SDK</span>
+        <span class="swatch-badge">Knowledge Graph</span>
+        <span class="swatch-badge">Telegram-Native</span>
+      </div>
+    </div>
+    <div class="swatch-foot">
+      <span class="swatch-foot-name">VERDIGRIS</span>
+      <div class="dot-row">
+        <div class="dot" style="background:#0b1a14"></div>
+        <div class="dot" style="background:#122b1e"></div>
+        <div class="dot" style="background:#c98232"></div>
+        <div class="dot" style="background:#e8f0e4"></div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<p style="text-align:center; margin-top:40px; font-family:'IBM Plex Mono',monospace; font-size:12px; color:#555; letter-spacing:0.1em;">
+  TELL ME A NUMBER AND I'LL REBUILD THE FULL PAGE IN THAT DIRECTION
+</p>
+
+</body>
+</html>
