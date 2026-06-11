@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Verne - Colour Directions 01 / 02 / 05</title>
+<title>Verne - Colour Directions 01 / 02 / 05 / 06</title>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,400&family=IBM+Plex+Mono:wght@400;500&family=Source+Sans+3:wght@300;400;600&display=swap" rel="stylesheet">
 <style>
 * { margin:0; padding:0; box-sizing:border-box; }
@@ -29,6 +29,7 @@ body { background: #0a0a0a; font-family: 'Source Sans 3', sans-serif; }
 .a1 { background:rgba(201,160,80,0.12); color:#c9a050; border:1px solid rgba(201,160,80,0.35); }
 .a2 { background:rgba(0,200,180,0.08); color:#00c8b4; border:1px solid rgba(0,200,180,0.3); }
 .a5 { background:rgba(201,130,50,0.1); color:#c98232; border:1px solid rgba(201,130,50,0.3); }
+.a6 { background:rgba(91,159,223,0.12); color:#5b9fdf; border:1px solid rgba(91,159,223,0.35); }
 
 .divider {
   text-align:center;
@@ -166,6 +167,64 @@ body { background: #0a0a0a; font-family: 'Source Sans 3', sans-serif; }
 .t5 .arch-grid { display:grid; grid-template-columns:1fr 1fr; gap:18px; margin-top:36px; }
 
 
+/* ════════════════════════════════════════════
+   THEME 06 - ROYAL COBALT (elephantsdance.com)
+════════════════════════════════════════════ */
+.t6 { --bg:#182878; --bg2:#0f1f60; --bggrad: linear-gradient(160deg,#1e3490 0%,#0e1a6a 100%); --acc:#5b9fdf; --acc2:#3d7ec4; --text:#ffffff; --dim:rgba(255,255,255,0.72); --ghost:rgba(255,255,255,0.07); }
+
+.t6 .hero {
+  background: linear-gradient(160deg, #1e3490 0%, #0e1a6a 55%, #0a1458 100%);
+  padding: 72px 0 64px;
+  border-bottom: 1px solid rgba(91,159,223,0.25);
+  position: relative;
+  overflow: hidden;
+}
+/* ghost compass watermark like the elephant silhouette */
+.t6 .hero::after {
+  content: '';
+  position: absolute;
+  right: 5%;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 340px;
+  height: 340px;
+  background: rgba(255,255,255,0.055);
+  border-radius: 50%;
+  border: 40px solid rgba(255,255,255,0.04);
+  pointer-events: none;
+}
+.t6 .kicker { color: var(--acc); }
+.t6 .rule { background: linear-gradient(90deg, var(--acc), transparent); }
+.t6 .hero-h1 { font-family:'Playfair Display',serif; font-size:100px; font-weight:700; letter-spacing:0.04em; color:var(--text); line-height:1; }
+.t6 .hero-tag { font-family:'Playfair Display',serif; font-style:italic; font-size:22px; color:rgba(255,255,255,0.85); margin-top:14px; }
+.t6 .hero-sub { font-size:16px; color:var(--dim); max-width:500px; margin-top:20px; line-height:1.7; }
+.t6 .hero-sub strong { color: var(--acc); font-style:italic; font-weight:400; }
+.t6 .badge { font-family:'IBM Plex Mono',monospace; font-size:11px; padding:6px 14px; border-radius:999px; background:rgba(91,159,223,0.12); border:1px solid rgba(91,159,223,0.3); color:var(--acc); display:inline-block; margin:4px 4px 0 0; }
+
+.t6 .quote-band {
+  background: linear-gradient(135deg, #0e1a6a, #182878);
+  border-top: 1px solid rgba(91,159,223,0.2);
+  border-bottom: 1px solid rgba(91,159,223,0.2);
+  padding:52px 0; text-align:center;
+}
+.t6 .quote-band blockquote { font-family:'Playfair Display',serif; font-style:italic; font-size:26px; color:var(--text); max-width:680px; margin:0 auto; line-height:1.45; }
+.t6 .quote-band cite { font-family:'IBM Plex Mono',monospace; font-style:normal; font-size:12px; letter-spacing:0.2em; text-transform:uppercase; color:var(--acc2); margin-top:18px; display:block; filter:brightness(1.3); }
+
+.t6 .cards-section { background:linear-gradient(180deg,#0e1a6a,#0a1458); padding:64px 0; border-bottom:1px solid rgba(91,159,223,0.15); }
+.t6 .sec-h2 { font-family:'Playfair Display',serif; font-size:36px; font-weight:600; color:var(--text); }
+.t6 .cards { display:grid; grid-template-columns:repeat(3,1fr); gap:18px; margin-top:36px; }
+.t6 .card { border:1px solid rgba(91,159,223,0.2); background:rgba(255,255,255,0.05); backdrop-filter:blur(4px); padding:24px; border-radius:6px; }
+.t6 .card-num { font-family:'IBM Plex Mono',monospace; font-size:11px; color:var(--acc); letter-spacing:0.14em; }
+.t6 .card h3 { font-family:'Playfair Display',serif; font-size:18px; color:var(--text); margin:10px 0 8px; font-weight:600; }
+.t6 .card p { font-size:14px; color:var(--dim); line-height:1.65; }
+
+.t6 .text-section { padding:64px 0; background:linear-gradient(180deg,#0a1458,#0e1a6a); }
+.t6 .arch-item { border-left:2px solid var(--acc2); padding:4px 0 4px 20px; margin-bottom:20px; }
+.t6 .arch-item h3 { font-family:'Playfair Display',serif; font-size:17px; color:var(--text); font-weight:600; margin-bottom:6px; }
+.t6 .arch-item p { font-size:14px; color:var(--dim); }
+.t6 .arch-item code { font-family:'IBM Plex Mono',monospace; font-size:12px; color:var(--acc); }
+.t6 .arch-grid { display:grid; grid-template-columns:1fr 1fr; gap:18px; margin-top:36px; }
+
 @media(max-width:700px){
   .t1 .cards,.t2 .cards,.t5 .cards { grid-template-columns:1fr; }
   .t1 .arch-grid,.t2 .arch-grid,.t5 .arch-grid { grid-template-columns:1fr; }
@@ -181,6 +240,7 @@ body { background: #0a0a0a; font-family: 'Source Sans 3', sans-serif; }
   <a class="a1" href="#t1">01 - Brass & Navy</a>
   <a class="a2" href="#t2">02 - Deep Ocean</a>
   <a class="a5" href="#t5">05 - Verdigris</a>
+  <a class="a6" href="#t6">06 - Royal Cobalt</a>
 </nav>
 
 
@@ -415,6 +475,90 @@ body { background: #0a0a0a; font-family: 'Source Sans 3', sans-serif; }
       <span class="kicker">Under the hood</span>
       <h2 class="sec-h2" style="font-family:'Playfair Display',serif;font-size:36px;font-weight:600;color:#e8f0e4">The Engine Room</h2>
       <div class="rule" style="background:linear-gradient(90deg,#c98232,transparent)"></div>
+      <div class="arch-grid">
+        <div class="arch-item">
+          <h3>Host and Container Split</h3>
+          <p>A Node host routes platform messages; each session gets an isolated <code>Bun-runtime</code> Docker container running the Claude Agent SDK. Containers are ephemeral - killed and respawned freely.</p>
+        </div>
+        <div class="arch-item">
+          <h3>Two-Database Message Bus</h3>
+          <p>No IPC between host and agent. Each session has <code>inbound.db</code> and <code>outbound.db</code>. One writer per file. Even/odd sequence numbers. That is the whole protocol.</p>
+        </div>
+        <div class="arch-item">
+          <h3>Semantic Memory Layer</h3>
+          <p><code>mnemon</code> - a Go-based SQLite knowledge graph - hooks into the agent's turn lifecycle: recall before responding, store after. Embeddings via <code>nomic-embed-text</code> on local Ollama.</p>
+        </div>
+        <div class="arch-item">
+          <h3>Zero-Credential Containers</h3>
+          <p>API keys and OAuth tokens never enter the agent container. A <code>OneCLI</code> gateway proxies outbound HTTPS and injects credentials at request time.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<div class="divider">- - - - - - - - - - - - 06 - ROYAL COBALT (elephantsdance.com) - - - - - - - - - - - -</div>
+
+<!-- ══════════════════════════════════════════════
+     THEME 06 - ROYAL COBALT
+══════════════════════════════════════════════ -->
+<div id="t6" class="t6">
+
+  <section class="hero">
+    <div class="wrap">
+      <span class="kicker">A Personal AI Agent - Self-Hosted - Always On</span>
+      <div class="hero-h1">VERNE</div>
+      <p class="hero-tag">"An agent for extraordinary voyages."</p>
+      <p class="hero-sub">Named for Jules Verne, who mapped territories everyone else called unreachable. A persistent, self-hosted AI agent that lives in your messaging apps, remembers everything that matters, and works business problems like a <strong>strategic peer</strong> - not a chatbot.</p>
+      <div style="margin-top:26px">
+        <span class="badge">Claude Agent SDK</span>
+        <span class="badge">Knowledge Graph Memory</span>
+        <span class="badge">NanoClaw v2</span>
+        <span class="badge">Telegram-Native</span>
+        <span class="badge">Runs on My Mac</span>
+      </div>
+    </div>
+  </section>
+
+  <div class="quote-band">
+    <div class="wrap">
+      <blockquote>"Anything one man can imagine, other men can make real."
+        <cite>Jules Verne, 1828-1905</cite>
+      </blockquote>
+    </div>
+  </div>
+
+  <section class="cards-section">
+    <div class="wrap">
+      <span class="kicker">What Verne does</span>
+      <h2 class="sec-h2">The Voyages</h2>
+      <div class="rule" style="background:linear-gradient(90deg,#5b9fdf,transparent)"></div>
+      <div class="cards">
+        <div class="card">
+          <span class="card-num">VOYAGE 01</span>
+          <h3>Strategic Sparring</h3>
+          <p>Business strategy, positioning, and decision support - tuned to challenge assumptions and push back. Truth over comfort, written into his system prompt.</p>
+        </div>
+        <div class="card">
+          <span class="card-num">VOYAGE 02</span>
+          <h3>Memory That Compounds</h3>
+          <p>A semantic knowledge graph stores facts, decisions, contacts, and timelines after every conversation - and recalls them before each reply. Embeddings run locally via Ollama.</p>
+        </div>
+        <div class="card">
+          <span class="card-num">VOYAGE 03</span>
+          <h3>Documents and Mail</h3>
+          <p>Reads and writes Google Docs through custom MCP tools, keeps a running notes document, and drafts email in your voice - with a hard rule: nothing is sent without confirmation.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="text-section">
+    <div class="wrap">
+      <span class="kicker">Under the hood</span>
+      <h2 class="sec-h2">The Engine Room</h2>
+      <div class="rule" style="background:linear-gradient(90deg,#5b9fdf,transparent)"></div>
       <div class="arch-grid">
         <div class="arch-item">
           <h3>Host and Container Split</h3>
