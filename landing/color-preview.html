@@ -3,266 +3,444 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Verne — Colour Direction Samples</title>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=IBM+Plex+Mono:wght@400;500&family=Source+Sans+3:wght@300;400&display=swap" rel="stylesheet">
+<title>Verne - Colour Directions 01 / 02 / 05</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,400&family=IBM+Plex+Mono:wght@400;500&family=Source+Sans+3:wght@300;400;600&display=swap" rel="stylesheet">
 <style>
 * { margin:0; padding:0; box-sizing:border-box; }
-body { background:#111; font-family: 'Source Sans 3', sans-serif; padding: 40px 24px; }
-h1 { font-family: 'IBM Plex Mono', monospace; color:#888; font-size:13px; letter-spacing:0.2em; text-transform:uppercase; margin-bottom:40px; text-align:center; }
+html { scroll-behavior: smooth; }
+body { background: #0a0a0a; font-family: 'Source Sans 3', sans-serif; }
 
-.grid { display:grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap:28px; max-width:1200px; margin:0 auto; }
+/* ── NAV ── */
+.picker {
+  position: sticky; top:0; z-index:100;
+  background: rgba(10,10,10,0.96);
+  border-bottom: 1px solid #222;
+  padding: 14px 32px;
+  display: flex; gap: 24px; align-items: center;
+}
+.picker span { font-family:'IBM Plex Mono',monospace; font-size:11px; color:#555; letter-spacing:0.18em; text-transform:uppercase; }
+.picker a {
+  font-family:'IBM Plex Mono',monospace; font-size:12px;
+  letter-spacing:0.1em; text-transform:uppercase;
+  padding: 7px 18px; border-radius:999px;
+  text-decoration:none; transition:all 0.2s;
+}
+.picker a:hover { filter:brightness(1.2); }
+.a1 { background:rgba(201,160,80,0.12); color:#c9a050; border:1px solid rgba(201,160,80,0.35); }
+.a2 { background:rgba(0,200,180,0.08); color:#00c8b4; border:1px solid rgba(0,200,180,0.3); }
+.a5 { background:rgba(201,130,50,0.1); color:#c98232; border:1px solid rgba(201,130,50,0.3); }
 
-.swatch {
-  border-radius: 8px;
-  overflow: hidden;
-  position: relative;
-  cursor: pointer;
-  transition: transform 0.2s;
+.divider {
+  text-align:center;
+  padding: 20px;
+  font-family:'IBM Plex Mono',monospace;
+  font-size:11px; letter-spacing:0.25em; color:#333;
+  text-transform:uppercase;
+  border-top: 1px solid #1a1a1a;
 }
-.swatch:hover { transform: translateY(-4px); }
 
-.swatch-hero {
-  padding: 36px 32px 28px;
-  min-height: 280px;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-  position: relative;
+/* ── SHARED LAYOUT ── */
+.wrap { max-width:1080px; margin:0 auto; padding:0 32px; }
+.kicker {
+  font-family:'IBM Plex Mono',monospace;
+  font-size:11.5px; letter-spacing:0.28em;
+  text-transform:uppercase; display:block; margin-bottom:16px;
 }
-.swatch-label {
-  position: absolute;
-  top: 14px; right: 14px;
-  font-family: 'IBM Plex Mono', monospace;
-  font-size: 10px;
-  letter-spacing: 0.18em;
-  padding: 5px 10px;
-  border-radius: 999px;
-  text-transform: uppercase;
-}
-.swatch-name {
-  font-family: 'Playfair Display', serif;
-  font-size: 54px;
-  font-weight: 700;
-  letter-spacing: 0.04em;
-  line-height: 1;
-  margin-bottom: 8px;
-}
-.swatch-tag {
-  font-family: 'Playfair Display', serif;
-  font-style: italic;
-  font-size: 15px;
-  margin-bottom: 16px;
-}
-.swatch-badge {
-  display: inline-block;
-  font-family: 'IBM Plex Mono', monospace;
-  font-size: 10px;
-  letter-spacing: 0.04em;
-  padding: 5px 12px;
-  border-radius: 999px;
-  margin-right: 6px;
-  margin-top: 4px;
-}
-.swatch-foot {
-  padding: 16px 20px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-.swatch-foot-name {
-  font-family: 'IBM Plex Mono', monospace;
-  font-size: 12px;
-  letter-spacing: 0.12em;
-  font-weight: 500;
-}
-.dot-row { display: flex; gap: 8px; }
-.dot { width: 18px; height: 18px; border-radius: 50%; border: 1px solid rgba(255,255,255,0.15); }
+.rule { width:56px; height:1px; margin:18px 0 26px; }
 
 
-/* ── 1. CURRENT: Deep Navy + Brass ─────────────────────── */
-.c1 .swatch-hero {
-  background: radial-gradient(ellipse 80% 60% at 70% 20%, rgba(46,111,108,0.2),transparent 60%), #0e1a2b;
-}
-.c1 .swatch-name  { color: #f3ead7; }
-.c1 .swatch-tag   { color: #c9a050; }
-.c1 .swatch-badge { background: rgba(201,160,80,0.1); border: 1px solid rgba(201,160,80,0.4); color: #c9a050; }
-.c1 .swatch-label { background: rgba(201,160,80,0.15); color: #c9a050; border: 1px solid rgba(201,160,80,0.3); }
-.c1 .swatch-foot  { background: #0a1220; }
-.c1 .swatch-foot-name { color: #c9a050; }
+/* ════════════════════════════════════════════
+   THEME 01 - BRASS & NAVY
+════════════════════════════════════════════ */
+.t1 { --bg: #0e1a2b; --bg2: #16263c; --acc: #c9a050; --acc2: #9a7b3c; --teal: #2e6f6c; --text: #e8e0cd; --dim: #a9b4c4; --paper: #f3ead7; }
 
-/* ── 2. SUBMARINE: Black + Electric Teal ────────────────── */
-.c2 .swatch-hero {
-  background: radial-gradient(ellipse 60% 50% at 30% 70%, rgba(0,200,180,0.12), transparent 60%), #05080c;
+.t1 .hero {
+  background: radial-gradient(ellipse 80% 60% at 70% 20%, rgba(46,111,108,0.2),transparent 60%),
+              radial-gradient(ellipse 50% 50% at 15% 85%, rgba(201,160,80,0.07),transparent),
+              var(--bg);
+  padding: 72px 0 64px;
+  border-bottom: 1px solid rgba(201,160,80,0.2);
 }
-.c2 .swatch-name  { color: #e0faf7; }
-.c2 .swatch-tag   { color: #00c8b4; }
-.c2 .swatch-badge { background: rgba(0,200,180,0.08); border: 1px solid rgba(0,200,180,0.35); color: #00c8b4; }
-.c2 .swatch-label { background: rgba(0,200,180,0.1); color: #00c8b4; border: 1px solid rgba(0,200,180,0.3); }
-.c2 .swatch-foot  { background: #030507; }
-.c2 .swatch-foot-name { color: #00c8b4; }
+.t1 .kicker { color: var(--acc); }
+.t1 .rule { background: linear-gradient(90deg, var(--acc), transparent); }
+.t1 .hero-h1 { font-family:'Playfair Display',serif; font-size:100px; font-weight:700; letter-spacing:0.04em; color:var(--paper); line-height:1; }
+.t1 .hero-tag { font-family:'Playfair Display',serif; font-style:italic; font-size:22px; color:var(--acc); margin-top:14px; }
+.t1 .hero-sub { font-size:16px; color:var(--dim); max-width:500px; margin-top:20px; line-height:1.7; }
+.t1 .badge { font-family:'IBM Plex Mono',monospace; font-size:11px; padding:6px 14px; border-radius:999px; background:rgba(201,160,80,0.07); border:1px solid rgba(201,160,80,0.35); color:var(--acc); display:inline-block; margin:4px 4px 0 0; }
 
-/* ── 3. PARCHMENT: Light / Inverted ─────────────────────── */
-.c3 .swatch-hero {
-  background: radial-gradient(ellipse 70% 50% at 60% 30%, rgba(164,80,46,0.08), transparent), #f0e6ce;
+.t1 .quote-band { background:var(--paper); padding:52px 0; text-align:center; }
+.t1 .quote-band blockquote { font-family:'Playfair Display',serif; font-style:italic; font-size:26px; color:var(--bg); max-width:680px; margin:0 auto; line-height:1.45; }
+.t1 .quote-band cite { font-family:'IBM Plex Mono',monospace; font-style:normal; font-size:12px; letter-spacing:0.2em; text-transform:uppercase; color:var(--acc2); margin-top:18px; display:block; }
+
+.t1 .cards-section { background:var(--bg2); padding:64px 0; border-top:1px solid rgba(201,160,80,0.15); border-bottom:1px solid rgba(201,160,80,0.15); }
+.t1 .sec-h2 { font-family:'Playfair Display',serif; font-size:36px; font-weight:600; color:var(--paper); }
+.t1 .cards { display:grid; grid-template-columns:repeat(3,1fr); gap:18px; margin-top:36px; }
+.t1 .card { border:1px solid rgba(201,160,80,0.22); background:rgba(14,26,43,0.6); padding:24px; border-radius:4px; }
+.t1 .card-num { font-family:'IBM Plex Mono',monospace; font-size:11px; color:var(--acc); letter-spacing:0.14em; }
+.t1 .card h3 { font-family:'Playfair Display',serif; font-size:18px; color:var(--paper); margin:10px 0 8px; font-weight:600; }
+.t1 .card p { font-size:14px; color:var(--dim); line-height:1.65; }
+
+.t1 .text-section { padding:64px 0; background:var(--bg); }
+.t1 .arch-item { border-left:2px solid var(--acc2); padding:4px 0 4px 20px; margin-bottom:20px; }
+.t1 .arch-item h3 { font-family:'Playfair Display',serif; font-size:17px; color:var(--paper); font-weight:600; margin-bottom:6px; }
+.t1 .arch-item p { font-size:14px; color:var(--dim); }
+.t1 .arch-item code { font-family:'IBM Plex Mono',monospace; font-size:12px; color:var(--acc); }
+.t1 .arch-grid { display:grid; grid-template-columns:1fr 1fr; gap:18px; margin-top:36px; }
+
+
+/* ════════════════════════════════════════════
+   THEME 02 - DEEP OCEAN
+════════════════════════════════════════════ */
+.t2 { --bg:#05080c; --bg2:#080e15; --acc:#00c8b4; --acc2:#008c7c; --glow:rgba(0,200,180,0.15); --text:#e0faf7; --dim:#7ab8b2; --paper:#c8f5ef; }
+
+.t2 .hero {
+  background: radial-gradient(ellipse 65% 55% at 30% 70%, rgba(0,200,180,0.12),transparent 60%),
+              radial-gradient(ellipse 40% 40% at 80% 20%, rgba(0,150,120,0.07),transparent),
+              var(--bg);
+  padding: 72px 0 64px;
+  border-bottom: 1px solid rgba(0,200,180,0.18);
 }
-.c3 .swatch-name  { color: #1a0f06; }
-.c3 .swatch-tag   { color: #8b4513; }
-.c3 .swatch-badge { background: rgba(139,69,19,0.08); border: 1px solid rgba(139,69,19,0.3); color: #8b4513; }
-.c3 .swatch-label { background: rgba(139,69,19,0.1); color: #8b4513; border: 1px solid rgba(139,69,19,0.25); }
-.c3 .swatch-foot  { background: #e0d3b5; }
-.c3 .swatch-foot-name { color: #8b4513; }
+.t2 .kicker { color: var(--acc); }
+.t2 .rule { background: linear-gradient(90deg, var(--acc), transparent); }
+.t2 .hero-h1 { font-family:'Playfair Display',serif; font-size:100px; font-weight:700; letter-spacing:0.04em; color:var(--text); line-height:1; }
+.t2 .hero-tag { font-family:'Playfair Display',serif; font-style:italic; font-size:22px; color:var(--acc); margin-top:14px; }
+.t2 .hero-sub { font-size:16px; color:var(--dim); max-width:500px; margin-top:20px; line-height:1.7; }
+.t2 .badge { font-family:'IBM Plex Mono',monospace; font-size:11px; padding:6px 14px; border-radius:999px; background:rgba(0,200,180,0.07); border:1px solid rgba(0,200,180,0.3); color:var(--acc); display:inline-block; margin:4px 4px 0 0; }
 
-/* ── 4. CRIMSON DEEP: Navy + Crimson red ────────────────── */
-.c4 .swatch-hero {
-  background: radial-gradient(ellipse 65% 55% at 75% 25%, rgba(180,30,50,0.18), transparent 60%), #0d1521;
+.t2 .quote-band { background: linear-gradient(135deg, #071512, #0a1f1c); padding:52px 0; text-align:center; border-top:1px solid rgba(0,200,180,0.15); border-bottom:1px solid rgba(0,200,180,0.15); }
+.t2 .quote-band blockquote { font-family:'Playfair Display',serif; font-style:italic; font-size:26px; color:var(--text); max-width:680px; margin:0 auto; line-height:1.45; }
+.t2 .quote-band cite { font-family:'IBM Plex Mono',monospace; font-style:normal; font-size:12px; letter-spacing:0.2em; text-transform:uppercase; color:var(--acc2); margin-top:18px; display:block; filter:brightness(1.4); }
+
+.t2 .cards-section { background:var(--bg2); padding:64px 0; border-top:1px solid rgba(0,200,180,0.12); border-bottom:1px solid rgba(0,200,180,0.12); }
+.t2 .sec-h2 { font-family:'Playfair Display',serif; font-size:36px; font-weight:600; color:var(--text); }
+.t2 .cards { display:grid; grid-template-columns:repeat(3,1fr); gap:18px; margin-top:36px; }
+.t2 .card { border:1px solid rgba(0,200,180,0.18); background:rgba(5,8,12,0.7); padding:24px; border-radius:4px; }
+.t2 .card-num { font-family:'IBM Plex Mono',monospace; font-size:11px; color:var(--acc); letter-spacing:0.14em; }
+.t2 .card h3 { font-family:'Playfair Display',serif; font-size:18px; color:var(--text); margin:10px 0 8px; font-weight:600; }
+.t2 .card p { font-size:14px; color:var(--dim); line-height:1.65; }
+
+.t2 .text-section { padding:64px 0; background:var(--bg); }
+.t2 .arch-item { border-left:2px solid var(--acc2); padding:4px 0 4px 20px; margin-bottom:20px; }
+.t2 .arch-item h3 { font-family:'Playfair Display',serif; font-size:17px; color:var(--text); font-weight:600; margin-bottom:6px; }
+.t2 .arch-item p { font-size:14px; color:var(--dim); }
+.t2 .arch-item code { font-family:'IBM Plex Mono',monospace; font-size:12px; color:var(--acc); }
+.t2 .arch-grid { display:grid; grid-template-columns:1fr 1fr; gap:18px; margin-top:36px; }
+
+
+/* ════════════════════════════════════════════
+   THEME 05 - VERDIGRIS
+════════════════════════════════════════════ */
+.t5 { --bg:#0b1a14; --bg2:#0f2219; --acc:#c98232; --acc2:#8a5a20; --green:#2a6645; --text:#e8f0e4; --dim:#8aab96; --paper:#d9eed4; }
+
+.t5 .hero {
+  background: radial-gradient(ellipse 70% 60% at 40% 60%, rgba(201,130,50,0.1),transparent 55%),
+              radial-gradient(ellipse 50% 40% at 80% 20%, rgba(42,102,69,0.18),transparent),
+              var(--bg);
+  padding: 72px 0 64px;
+  border-bottom: 1px solid rgba(201,130,50,0.2);
 }
-.c4 .swatch-name  { color: #f5eee6; }
-.c4 .swatch-tag   { color: #d94050; }
-.c4 .swatch-badge { background: rgba(217,64,80,0.1); border: 1px solid rgba(217,64,80,0.35); color: #d94050; }
-.c4 .swatch-label { background: rgba(217,64,80,0.12); color: #d94050; border: 1px solid rgba(217,64,80,0.3); }
-.c4 .swatch-foot  { background: #080e18; }
-.c4 .swatch-foot-name { color: #d94050; }
+.t5 .kicker { color: var(--acc); }
+.t5 .rule { background: linear-gradient(90deg, var(--acc), transparent); }
+.t5 .hero-h1 { font-family:'Playfair Display',serif; font-size:100px; font-weight:700; letter-spacing:0.04em; color:var(--text); line-height:1; }
+.t5 .hero-tag { font-family:'Playfair Display',serif; font-style:italic; font-size:22px; color:var(--acc); margin-top:14px; }
+.t5 .hero-sub { font-size:16px; color:var(--dim); max-width:500px; margin-top:20px; line-height:1.7; }
+.t5 .badge { font-family:'IBM Plex Mono',monospace; font-size:11px; padding:6px 14px; border-radius:999px; background:rgba(201,130,50,0.08); border:1px solid rgba(201,130,50,0.32); color:var(--acc); display:inline-block; margin:4px 4px 0 0; }
 
-/* ── 5. VERDIGRIS: Forest + Copper ─────────────────────── */
-.c5 .swatch-hero {
-  background: radial-gradient(ellipse 70% 60% at 40% 60%, rgba(201,130,50,0.12), transparent 55%), #0b1a14;
+.t5 .quote-band { background:var(--paper); padding:52px 0; text-align:center; }
+.t5 .quote-band blockquote { font-family:'Playfair Display',serif; font-style:italic; font-size:26px; color:var(--bg); max-width:680px; margin:0 auto; line-height:1.45; }
+.t5 .quote-band cite { font-family:'IBM Plex Mono',monospace; font-style:normal; font-size:12px; letter-spacing:0.2em; text-transform:uppercase; color:var(--acc2); margin-top:18px; display:block; }
+
+.t5 .cards-section { background:var(--bg2); padding:64px 0; border-top:1px solid rgba(201,130,50,0.15); border-bottom:1px solid rgba(201,130,50,0.15); }
+.t5 .sec-h2 { font-family:'Playfair Display',serif; font-size:36px; font-weight:600; color:var(--text); }
+.t5 .cards { display:grid; grid-template-columns:repeat(3,1fr); gap:18px; margin-top:36px; }
+.t5 .card { border:1px solid rgba(201,130,50,0.2); background:rgba(11,26,20,0.7); padding:24px; border-radius:4px; }
+.t5 .card-num { font-family:'IBM Plex Mono',monospace; font-size:11px; color:var(--acc); letter-spacing:0.14em; }
+.t5 .card h3 { font-family:'Playfair Display',serif; font-size:18px; color:var(--text); margin:10px 0 8px; font-weight:600; }
+.t5 .card p { font-size:14px; color:var(--dim); line-height:1.65; }
+
+.t5 .text-section { padding:64px 0; background:var(--bg); }
+.t5 .arch-item { border-left:2px solid var(--green); padding:4px 0 4px 20px; margin-bottom:20px; }
+.t5 .arch-item h3 { font-family:'Playfair Display',serif; font-size:17px; color:var(--text); font-weight:600; margin-bottom:6px; }
+.t5 .arch-item p { font-size:14px; color:var(--dim); }
+.t5 .arch-item code { font-family:'IBM Plex Mono',monospace; font-size:12px; color:var(--acc); }
+.t5 .arch-grid { display:grid; grid-template-columns:1fr 1fr; gap:18px; margin-top:36px; }
+
+
+@media(max-width:700px){
+  .t1 .cards,.t2 .cards,.t5 .cards { grid-template-columns:1fr; }
+  .t1 .arch-grid,.t2 .arch-grid,.t5 .arch-grid { grid-template-columns:1fr; }
+  .t1 .hero-h1,.t2 .hero-h1,.t5 .hero-h1 { font-size:64px; }
+  .picker { flex-wrap:wrap; gap:10px; }
 }
-.c5 .swatch-name  { color: #e8f0e4; }
-.c5 .swatch-tag   { color: #c98232; }
-.c5 .swatch-badge { background: rgba(201,130,50,0.1); border: 1px solid rgba(201,130,50,0.35); color: #c98232; }
-.c5 .swatch-label { background: rgba(201,130,50,0.1); color: #c98232; border: 1px solid rgba(201,130,50,0.3); }
-.c5 .swatch-foot  { background: #07110d; }
-.c5 .swatch-foot-name { color: #c98232; }
-
-.current-tag { font-size:10px; background:#333; color:#aaa; padding:2px 8px; border-radius:4px; margin-left:8px; font-family:'IBM Plex Mono',monospace; letter-spacing:0.08em; }
 </style>
 </head>
 <body>
 
-<h1>Verne — Colour Directions &nbsp;·&nbsp; Pick one before I build</h1>
+<nav class="picker">
+  <span>Jump to:</span>
+  <a class="a1" href="#t1">01 - Brass & Navy</a>
+  <a class="a2" href="#t2">02 - Deep Ocean</a>
+  <a class="a5" href="#t5">05 - Verdigris</a>
+</nav>
 
-<div class="grid">
 
-  <!-- 1 Current -->
-  <div class="swatch c1">
-    <div class="swatch-hero">
-      <span class="swatch-label">01 · BRASS &amp; NAVY</span>
-      <div class="swatch-name">VERNE</div>
-      <div class="swatch-tag">"An agent for extraordinary voyages."</div>
-      <div>
-        <span class="swatch-badge">Claude Agent SDK</span>
-        <span class="swatch-badge">Knowledge Graph</span>
-        <span class="swatch-badge">Telegram-Native</span>
+<!-- ══════════════════════════════════════════════
+     THEME 01 - BRASS & NAVY
+══════════════════════════════════════════════ -->
+<div id="t1" class="t1">
+
+  <section class="hero">
+    <div class="wrap">
+      <span class="kicker">A Personal AI Agent - Self-Hosted - Always On</span>
+      <div class="hero-h1">VERNE</div>
+      <p class="hero-tag">"An agent for extraordinary voyages."</p>
+      <p class="hero-sub">Named for Jules Verne, who mapped territories everyone else called unreachable. A persistent, self-hosted AI agent that lives in your messaging apps, remembers everything that matters, and works business problems like a strategic peer - not a chatbot.</p>
+      <div style="margin-top:26px">
+        <span class="badge">Claude Agent SDK</span>
+        <span class="badge">Knowledge Graph Memory</span>
+        <span class="badge">NanoClaw v2</span>
+        <span class="badge">Telegram-Native</span>
+        <span class="badge">Runs on My Mac</span>
       </div>
     </div>
-    <div class="swatch-foot">
-      <span class="swatch-foot-name">BRASS &amp; NAVY <span class="current-tag">current</span></span>
-      <div class="dot-row">
-        <div class="dot" style="background:#0e1a2b"></div>
-        <div class="dot" style="background:#2e6f6c"></div>
-        <div class="dot" style="background:#c9a050"></div>
-        <div class="dot" style="background:#f3ead7"></div>
-      </div>
+  </section>
+
+  <div class="quote-band">
+    <div class="wrap">
+      <blockquote>"Anything one man can imagine, other men can make real."
+        <cite>Jules Verne, 1828-1905</cite>
+      </blockquote>
     </div>
   </div>
 
-  <!-- 2 Submarine -->
-  <div class="swatch c2">
-    <div class="swatch-hero">
-      <span class="swatch-label">02 · DEEP OCEAN</span>
-      <div class="swatch-name">VERNE</div>
-      <div class="swatch-tag">"An agent for extraordinary voyages."</div>
-      <div>
-        <span class="swatch-badge">Claude Agent SDK</span>
-        <span class="swatch-badge">Knowledge Graph</span>
-        <span class="swatch-badge">Telegram-Native</span>
+  <section class="cards-section">
+    <div class="wrap">
+      <span class="kicker">What Verne does</span>
+      <h2 class="sec-h2">The Voyages</h2>
+      <div class="rule" style="background:linear-gradient(90deg,#c9a050,transparent)"></div>
+      <div class="cards">
+        <div class="card">
+          <span class="card-num">VOYAGE 01</span>
+          <h3>Strategic Sparring</h3>
+          <p>Business strategy, positioning, and decision support - tuned to challenge assumptions and push back. Truth over comfort, written into his system prompt.</p>
+        </div>
+        <div class="card">
+          <span class="card-num">VOYAGE 02</span>
+          <h3>Memory That Compounds</h3>
+          <p>A semantic knowledge graph stores facts, decisions, contacts, and timelines after every conversation - and recalls them before each reply. Embeddings run locally via Ollama.</p>
+        </div>
+        <div class="card">
+          <span class="card-num">VOYAGE 03</span>
+          <h3>Documents and Mail</h3>
+          <p>Reads and writes Google Docs through custom MCP tools, keeps a running notes document, and drafts email in your voice - with a hard rule: nothing is sent without confirmation.</p>
+        </div>
       </div>
     </div>
-    <div class="swatch-foot">
-      <span class="swatch-foot-name">DEEP OCEAN</span>
-      <div class="dot-row">
-        <div class="dot" style="background:#05080c"></div>
-        <div class="dot" style="background:#001a17"></div>
-        <div class="dot" style="background:#00c8b4"></div>
-        <div class="dot" style="background:#e0faf7"></div>
-      </div>
-    </div>
-  </div>
+  </section>
 
-  <!-- 3 Parchment -->
-  <div class="swatch c3">
-    <div class="swatch-hero">
-      <span class="swatch-label">03 · OLD MAP</span>
-      <div class="swatch-name">VERNE</div>
-      <div class="swatch-tag">"An agent for extraordinary voyages."</div>
-      <div>
-        <span class="swatch-badge">Claude Agent SDK</span>
-        <span class="swatch-badge">Knowledge Graph</span>
-        <span class="swatch-badge">Telegram-Native</span>
+  <section class="text-section">
+    <div class="wrap">
+      <span class="kicker">Under the hood</span>
+      <h2 class="sec-h2" style="font-family:'Playfair Display',serif;font-size:36px;font-weight:600;color:#f3ead7">The Engine Room</h2>
+      <div class="rule" style="background:linear-gradient(90deg,#c9a050,transparent)"></div>
+      <div class="arch-grid">
+        <div class="arch-item">
+          <h3>Host and Container Split</h3>
+          <p>A Node host routes platform messages; each session gets an isolated <code>Bun-runtime</code> Docker container running the Claude Agent SDK. Containers are ephemeral - killed and respawned freely.</p>
+        </div>
+        <div class="arch-item">
+          <h3>Two-Database Message Bus</h3>
+          <p>No IPC between host and agent. Each session has <code>inbound.db</code> and <code>outbound.db</code>. One writer per file. Even/odd sequence numbers. That is the whole protocol.</p>
+        </div>
+        <div class="arch-item">
+          <h3>Semantic Memory Layer</h3>
+          <p><code>mnemon</code> - a Go-based SQLite knowledge graph - hooks into the agent's turn lifecycle: recall before responding, store after. Embeddings via <code>nomic-embed-text</code> on local Ollama.</p>
+        </div>
+        <div class="arch-item">
+          <h3>Zero-Credential Containers</h3>
+          <p>API keys and OAuth tokens never enter the agent container. A <code>OneCLI</code> gateway proxies outbound HTTPS and injects credentials at request time.</p>
+        </div>
       </div>
     </div>
-    <div class="swatch-foot">
-      <span class="swatch-foot-name">OLD MAP (light)</span>
-      <div class="dot-row">
-        <div class="dot" style="background:#f0e6ce"></div>
-        <div class="dot" style="background:#ddd0b2"></div>
-        <div class="dot" style="background:#8b4513"></div>
-        <div class="dot" style="background:#1a0f06"></div>
-      </div>
-    </div>
-  </div>
-
-  <!-- 4 Crimson -->
-  <div class="swatch c4">
-    <div class="swatch-hero">
-      <span class="swatch-label">04 · CRIMSON DEEP</span>
-      <div class="swatch-name">VERNE</div>
-      <div class="swatch-tag">"An agent for extraordinary voyages."</div>
-      <div>
-        <span class="swatch-badge">Claude Agent SDK</span>
-        <span class="swatch-badge">Knowledge Graph</span>
-        <span class="swatch-badge">Telegram-Native</span>
-      </div>
-    </div>
-    <div class="swatch-foot">
-      <span class="swatch-foot-name">CRIMSON DEEP</span>
-      <div class="dot-row">
-        <div class="dot" style="background:#0d1521"></div>
-        <div class="dot" style="background:#1c2535"></div>
-        <div class="dot" style="background:#d94050"></div>
-        <div class="dot" style="background:#f5eee6"></div>
-      </div>
-    </div>
-  </div>
-
-  <!-- 5 Verdigris -->
-  <div class="swatch c5">
-    <div class="swatch-hero">
-      <span class="swatch-label">05 · VERDIGRIS</span>
-      <div class="swatch-name">VERNE</div>
-      <div class="swatch-tag">"An agent for extraordinary voyages."</div>
-      <div>
-        <span class="swatch-badge">Claude Agent SDK</span>
-        <span class="swatch-badge">Knowledge Graph</span>
-        <span class="swatch-badge">Telegram-Native</span>
-      </div>
-    </div>
-    <div class="swatch-foot">
-      <span class="swatch-foot-name">VERDIGRIS</span>
-      <div class="dot-row">
-        <div class="dot" style="background:#0b1a14"></div>
-        <div class="dot" style="background:#122b1e"></div>
-        <div class="dot" style="background:#c98232"></div>
-        <div class="dot" style="background:#e8f0e4"></div>
-      </div>
-    </div>
-  </div>
+  </section>
 
 </div>
 
-<p style="text-align:center; margin-top:40px; font-family:'IBM Plex Mono',monospace; font-size:12px; color:#555; letter-spacing:0.1em;">
-  TELL ME A NUMBER AND I'LL REBUILD THE FULL PAGE IN THAT DIRECTION
-</p>
+
+<div class="divider">- - - - - - - - - - - - 02 - DEEP OCEAN - - - - - - - - - - - -</div>
+
+
+<!-- ══════════════════════════════════════════════
+     THEME 02 - DEEP OCEAN
+══════════════════════════════════════════════ -->
+<div id="t2" class="t2">
+
+  <section class="hero">
+    <div class="wrap">
+      <span class="kicker">A Personal AI Agent - Self-Hosted - Always On</span>
+      <div class="hero-h1">VERNE</div>
+      <p class="hero-tag">"An agent for extraordinary voyages."</p>
+      <p class="hero-sub">Named for Jules Verne, who mapped territories everyone else called unreachable. A persistent, self-hosted AI agent that lives in your messaging apps, remembers everything that matters, and works business problems like a strategic peer - not a chatbot.</p>
+      <div style="margin-top:26px">
+        <span class="badge">Claude Agent SDK</span>
+        <span class="badge">Knowledge Graph Memory</span>
+        <span class="badge">NanoClaw v2</span>
+        <span class="badge">Telegram-Native</span>
+        <span class="badge">Runs on My Mac</span>
+      </div>
+    </div>
+  </section>
+
+  <div class="quote-band">
+    <div class="wrap">
+      <blockquote>"Anything one man can imagine, other men can make real."
+        <cite>Jules Verne, 1828-1905</cite>
+      </blockquote>
+    </div>
+  </div>
+
+  <section class="cards-section">
+    <div class="wrap">
+      <span class="kicker">What Verne does</span>
+      <h2 class="sec-h2">The Voyages</h2>
+      <div class="rule" style="background:linear-gradient(90deg,#00c8b4,transparent)"></div>
+      <div class="cards">
+        <div class="card">
+          <span class="card-num">VOYAGE 01</span>
+          <h3>Strategic Sparring</h3>
+          <p>Business strategy, positioning, and decision support - tuned to challenge assumptions and push back. Truth over comfort, written into his system prompt.</p>
+        </div>
+        <div class="card">
+          <span class="card-num">VOYAGE 02</span>
+          <h3>Memory That Compounds</h3>
+          <p>A semantic knowledge graph stores facts, decisions, contacts, and timelines after every conversation - and recalls them before each reply. Embeddings run locally via Ollama.</p>
+        </div>
+        <div class="card">
+          <span class="card-num">VOYAGE 03</span>
+          <h3>Documents and Mail</h3>
+          <p>Reads and writes Google Docs through custom MCP tools, keeps a running notes document, and drafts email in your voice - with a hard rule: nothing is sent without confirmation.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="text-section">
+    <div class="wrap">
+      <span class="kicker">Under the hood</span>
+      <h2 class="sec-h2" style="font-family:'Playfair Display',serif;font-size:36px;font-weight:600;color:#e0faf7">The Engine Room</h2>
+      <div class="rule" style="background:linear-gradient(90deg,#00c8b4,transparent)"></div>
+      <div class="arch-grid">
+        <div class="arch-item">
+          <h3>Host and Container Split</h3>
+          <p>A Node host routes platform messages; each session gets an isolated <code>Bun-runtime</code> Docker container running the Claude Agent SDK. Containers are ephemeral - killed and respawned freely.</p>
+        </div>
+        <div class="arch-item">
+          <h3>Two-Database Message Bus</h3>
+          <p>No IPC between host and agent. Each session has <code>inbound.db</code> and <code>outbound.db</code>. One writer per file. Even/odd sequence numbers. That is the whole protocol.</p>
+        </div>
+        <div class="arch-item">
+          <h3>Semantic Memory Layer</h3>
+          <p><code>mnemon</code> - a Go-based SQLite knowledge graph - hooks into the agent's turn lifecycle: recall before responding, store after. Embeddings via <code>nomic-embed-text</code> on local Ollama.</p>
+        </div>
+        <div class="arch-item">
+          <h3>Zero-Credential Containers</h3>
+          <p>API keys and OAuth tokens never enter the agent container. A <code>OneCLI</code> gateway proxies outbound HTTPS and injects credentials at request time.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+
+<div class="divider">- - - - - - - - - - - - 05 - VERDIGRIS - - - - - - - - - - - -</div>
+
+
+<!-- ══════════════════════════════════════════════
+     THEME 05 - VERDIGRIS
+══════════════════════════════════════════════ -->
+<div id="t5" class="t5">
+
+  <section class="hero">
+    <div class="wrap">
+      <span class="kicker">A Personal AI Agent - Self-Hosted - Always On</span>
+      <div class="hero-h1">VERNE</div>
+      <p class="hero-tag">"An agent for extraordinary voyages."</p>
+      <p class="hero-sub">Named for Jules Verne, who mapped territories everyone else called unreachable. A persistent, self-hosted AI agent that lives in your messaging apps, remembers everything that matters, and works business problems like a strategic peer - not a chatbot.</p>
+      <div style="margin-top:26px">
+        <span class="badge">Claude Agent SDK</span>
+        <span class="badge">Knowledge Graph Memory</span>
+        <span class="badge">NanoClaw v2</span>
+        <span class="badge">Telegram-Native</span>
+        <span class="badge">Runs on My Mac</span>
+      </div>
+    </div>
+  </section>
+
+  <div class="quote-band">
+    <div class="wrap">
+      <blockquote>"Anything one man can imagine, other men can make real."
+        <cite>Jules Verne, 1828-1905</cite>
+      </blockquote>
+    </div>
+  </div>
+
+  <section class="cards-section">
+    <div class="wrap">
+      <span class="kicker">What Verne does</span>
+      <h2 class="sec-h2">The Voyages</h2>
+      <div class="rule" style="background:linear-gradient(90deg,#c98232,transparent)"></div>
+      <div class="cards">
+        <div class="card">
+          <span class="card-num">VOYAGE 01</span>
+          <h3>Strategic Sparring</h3>
+          <p>Business strategy, positioning, and decision support - tuned to challenge assumptions and push back. Truth over comfort, written into his system prompt.</p>
+        </div>
+        <div class="card">
+          <span class="card-num">VOYAGE 02</span>
+          <h3>Memory That Compounds</h3>
+          <p>A semantic knowledge graph stores facts, decisions, contacts, and timelines after every conversation - and recalls them before each reply. Embeddings run locally via Ollama.</p>
+        </div>
+        <div class="card">
+          <span class="card-num">VOYAGE 03</span>
+          <h3>Documents and Mail</h3>
+          <p>Reads and writes Google Docs through custom MCP tools, keeps a running notes document, and drafts email in your voice - with a hard rule: nothing is sent without confirmation.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="text-section">
+    <div class="wrap">
+      <span class="kicker">Under the hood</span>
+      <h2 class="sec-h2" style="font-family:'Playfair Display',serif;font-size:36px;font-weight:600;color:#e8f0e4">The Engine Room</h2>
+      <div class="rule" style="background:linear-gradient(90deg,#c98232,transparent)"></div>
+      <div class="arch-grid">
+        <div class="arch-item">
+          <h3>Host and Container Split</h3>
+          <p>A Node host routes platform messages; each session gets an isolated <code>Bun-runtime</code> Docker container running the Claude Agent SDK. Containers are ephemeral - killed and respawned freely.</p>
+        </div>
+        <div class="arch-item">
+          <h3>Two-Database Message Bus</h3>
+          <p>No IPC between host and agent. Each session has <code>inbound.db</code> and <code>outbound.db</code>. One writer per file. Even/odd sequence numbers. That is the whole protocol.</p>
+        </div>
+        <div class="arch-item">
+          <h3>Semantic Memory Layer</h3>
+          <p><code>mnemon</code> - a Go-based SQLite knowledge graph - hooks into the agent's turn lifecycle: recall before responding, store after. Embeddings via <code>nomic-embed-text</code> on local Ollama.</p>
+        </div>
+        <div class="arch-item">
+          <h3>Zero-Credential Containers</h3>
+          <p>API keys and OAuth tokens never enter the agent container. A <code>OneCLI</code> gateway proxies outbound HTTPS and injects credentials at request time.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<div style="text-align:center;padding:40px;font-family:'IBM Plex Mono',monospace;font-size:11px;color:#333;letter-spacing:0.18em;text-transform:uppercase;">
+  pick a number and I'll rebuild the full page
+</div>
 
 </body>
 </html>
