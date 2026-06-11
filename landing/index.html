@@ -3,32 +3,32 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Verne — A Personal AI Agent for Extraordinary Voyages</title>
-<meta name="description" content="Verne is a self-hosted personal AI agent inspired by Jules Verne — built on NanoClaw, the Claude Agent SDK, and a persistent knowledge graph. By Nivedita Pande / Dendrons.ai">
+<title>Verne - A Personal AI Agent for Extraordinary Voyages</title>
+<meta name="description" content="Verne is a self-hosted personal AI agent inspired by Jules Verne - built on NanoClaw, the Claude Agent SDK, and a persistent knowledge graph. By Nivedita Pande / Dendrons.ai">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=IBM+Plex+Mono:wght@400;500&family=Source+Sans+3:wght@300;400;600&display=swap" rel="stylesheet">
 <style>
   :root {
-    --ink:        #0e1a2b;   /* deep ocean navy */
-    --ink-2:      #16263c;
-    --parchment:  #f3ead7;   /* old map paper */
-    --parchment-2:#e9dcc0;
-    --brass:      #c9a050;   /* brass / sextant gold */
-    --brass-dim:  #9a7b3c;
-    --teal:       #2e6f6c;   /* verdigris */
-    --rust:       #a4502e;
-    --text-light: #e8e0cd;
-    --text-dim:   #a9b4c4;
+    --bg:      #182878;
+    --bg2:     #0f1f60;
+    --bg3:     #0a1458;
+    --acc:     #5b9fdf;
+    --acc2:    #3d7ec4;
+    --text:    #ffffff;
+    --dim:     rgba(255,255,255,0.70);
+    --dim2:    rgba(255,255,255,0.45);
+    --glass:   rgba(255,255,255,0.06);
+    --border:  rgba(91,159,223,0.25);
+    --border2: rgba(91,159,223,0.15);
   }
 
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-
-  html { scroll-behavior: smooth; }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  html { scroll-behavior:smooth; }
 
   body {
-    background: var(--ink);
-    color: var(--text-light);
+    background: var(--bg3);
+    color: var(--text);
     font-family: 'Source Sans 3', sans-serif;
     font-weight: 300;
     line-height: 1.7;
@@ -36,15 +36,10 @@
   }
 
   h1, h2, h3 { font-family: 'Playfair Display', serif; }
-
-  .mono { font-family: 'IBM Plex Mono', monospace; }
-
-  a { color: var(--brass); text-decoration: none; }
+  a { color: var(--acc); text-decoration: none; }
   a:hover { text-decoration: underline; }
 
-  /* ---------- shared layout ---------- */
-  .wrap { max-width: 1060px; margin: 0 auto; padding: 0 24px; }
-
+  .wrap { max-width: 1060px; margin: 0 auto; padding: 0 28px; }
   section { padding: 96px 0; position: relative; }
 
   .kicker {
@@ -52,323 +47,312 @@
     font-size: 12px;
     letter-spacing: 0.28em;
     text-transform: uppercase;
-    color: var(--brass);
+    color: var(--acc);
     display: block;
     margin-bottom: 18px;
   }
 
   .rule {
-    width: 64px; height: 1px;
-    background: linear-gradient(90deg, var(--brass), transparent);
-    margin: 22px 0 30px;
+    width: 56px; height: 1px;
+    background: linear-gradient(90deg, var(--acc), transparent);
+    margin: 20px 0 28px;
   }
 
-  /* ---------- hero ---------- */
+  /* ---- HERO ---- */
   .hero {
     min-height: 92vh;
     display: flex;
     align-items: center;
     background:
-      radial-gradient(ellipse 80% 60% at 70% 20%, rgba(46,111,108,0.18), transparent 60%),
-      radial-gradient(ellipse 60% 50% at 15% 85%, rgba(201,160,80,0.08), transparent 60%),
-      var(--ink);
-    border-bottom: 1px solid rgba(201,160,80,0.25);
+      linear-gradient(160deg, #1e3490 0%, #122070 45%, #0a1458 100%);
+    border-bottom: 1px solid var(--border);
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* ghost circle watermark */
+  .hero::before {
+    content: '';
+    position: absolute;
+    right: 4%;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 420px;
+    height: 420px;
+    border-radius: 50%;
+    border: 56px solid rgba(255,255,255,0.04);
+    box-shadow: inset 0 0 80px rgba(91,159,223,0.06);
+    pointer-events: none;
+  }
+  .hero::after {
+    content: '';
+    position: absolute;
+    right: calc(4% + 80px);
+    top: 50%;
+    transform: translateY(-50%);
+    width: 260px;
+    height: 260px;
+    border-radius: 50%;
+    border: 2px solid rgba(91,159,223,0.1);
+    pointer-events: none;
   }
 
   .hero-grid {
     display: grid;
-    grid-template-columns: 1.2fr 0.8fr;
+    grid-template-columns: 1.15fr 0.85fr;
     gap: 48px;
     align-items: center;
     width: 100%;
+    position: relative;
+    z-index: 1;
   }
 
   .hero h1 {
-    font-size: clamp(64px, 10vw, 124px);
+    font-size: clamp(72px, 11vw, 128px);
     font-weight: 700;
     letter-spacing: 0.04em;
-    color: var(--parchment);
+    color: var(--text);
     line-height: 1;
   }
 
   .hero .tagline {
     font-family: 'Playfair Display', serif;
     font-style: italic;
-    font-size: clamp(19px, 2.4vw, 26px);
-    color: var(--brass);
-    margin-top: 18px;
+    font-size: clamp(18px, 2.2vw, 24px);
+    color: rgba(255,255,255,0.82);
+    margin-top: 16px;
   }
 
   .hero .sub {
-    margin-top: 26px;
-    max-width: 480px;
+    margin-top: 24px;
+    max-width: 500px;
     font-size: 17px;
-    color: var(--text-dim);
+    color: var(--dim);
+    line-height: 1.75;
   }
+  .hero .sub strong { color: var(--acc); font-weight: 400; font-style: italic; }
 
   .hero .meta {
-    margin-top: 36px;
+    margin-top: 32px;
     font-family: 'IBM Plex Mono', monospace;
-    font-size: 12.5px;
-    letter-spacing: 0.06em;
-    color: var(--text-dim);
+    font-size: 12px;
+    letter-spacing: 0.07em;
+    color: var(--dim2);
   }
-  .hero .meta span { color: var(--brass); }
+  .hero .meta span { color: var(--acc); }
 
-  /* compass rose — pure CSS/SVG */
-  .compass {
-    width: 100%;
-    max-width: 340px;
-    margin: 0 auto;
-    opacity: 0.92;
-    animation: drift 14s ease-in-out infinite;
-  }
-  @keyframes drift {
-    0%, 100% { transform: rotate(-3deg); }
-    50%      { transform: rotate(3deg); }
-  }
-
-  .badge-row { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 34px; }
+  .badge-row { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 30px; }
   .badge {
     font-family: 'IBM Plex Mono', monospace;
     font-size: 11.5px;
     letter-spacing: 0.04em;
     padding: 7px 14px;
-    border: 1px solid rgba(201,160,80,0.4);
+    border: 1px solid var(--border);
     border-radius: 999px;
-    color: var(--brass);
-    background: rgba(201,160,80,0.06);
+    color: var(--acc);
+    background: rgba(91,159,223,0.08);
   }
 
-  /* ---------- quote band ---------- */
+  /* compass rose */
+  .compass {
+    width: 100%;
+    max-width: 320px;
+    margin: 0 auto;
+    opacity: 0.85;
+    animation: drift 16s ease-in-out infinite;
+  }
+  @keyframes drift {
+    0%,100% { transform: rotate(-3deg); }
+    50%      { transform: rotate(3deg); }
+  }
+
+  /* ---- QUOTE BAND ---- */
   .quote-band {
-    background: var(--parchment);
-    color: var(--ink);
+    background: linear-gradient(135deg, #0e1a6a, #182878);
+    border-top: 1px solid var(--border2);
+    border-bottom: 1px solid var(--border2);
     padding: 72px 0;
     text-align: center;
   }
   .quote-band blockquote {
     font-family: 'Playfair Display', serif;
     font-style: italic;
-    font-size: clamp(22px, 3.2vw, 32px);
-    max-width: 760px;
+    font-size: clamp(20px, 3vw, 30px);
+    max-width: 720px;
     margin: 0 auto;
     line-height: 1.45;
+    color: var(--text);
   }
   .quote-band cite {
     display: block;
-    margin-top: 22px;
+    margin-top: 20px;
     font-family: 'IBM Plex Mono', monospace;
     font-style: normal;
-    font-size: 13px;
+    font-size: 12px;
     letter-spacing: 0.22em;
     text-transform: uppercase;
-    color: var(--brass-dim);
+    color: var(--acc2);
+    filter: brightness(1.35);
   }
 
-  /* ---------- the idea ---------- */
+  /* ---- IDEA ---- */
+  .idea {
+    background: linear-gradient(180deg, #0a1458, #0e1a6a);
+  }
   .idea h2, .voyages h2, .hood h2, .crew h2, .stack h2 {
-    font-size: clamp(30px, 4.4vw, 44px);
+    font-size: clamp(28px, 4vw, 42px);
     font-weight: 600;
-    color: var(--parchment);
+    color: var(--text);
   }
   .idea .lead {
     font-size: 19px;
-    color: var(--text-light);
+    color: rgba(255,255,255,0.88);
     max-width: 720px;
+    line-height: 1.7;
   }
-  .idea p + p { margin-top: 18px; }
-  .idea .body { max-width: 720px; color: var(--text-dim); margin-top: 22px; }
+  .idea .body { max-width: 720px; color: var(--dim); margin-top: 20px; }
+  .idea .body p + p { margin-top: 16px; }
 
-  /* ---------- voyages (capabilities) ---------- */
-  .voyages { background: var(--ink-2); border-top: 1px solid rgba(201,160,80,0.18); border-bottom: 1px solid rgba(201,160,80,0.18); }
-
+  /* ---- VOYAGES ---- */
+  .voyages {
+    background: linear-gradient(180deg, #0e1a6a, #122070);
+    border-top: 1px solid var(--border2);
+    border-bottom: 1px solid var(--border2);
+  }
   .cards {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 22px;
+    grid-template-columns: repeat(auto-fit, minmax(285px, 1fr));
+    gap: 20px;
     margin-top: 48px;
   }
   .card {
-    border: 1px solid rgba(201,160,80,0.25);
-    background: rgba(14,26,43,0.6);
-    padding: 30px 28px;
-    border-radius: 4px;
-    transition: border-color 0.25s ease, transform 0.25s ease;
+    border: 1px solid var(--border);
+    background: var(--glass);
+    backdrop-filter: blur(6px);
+    padding: 28px 26px;
+    border-radius: 6px;
+    transition: border-color 0.25s, transform 0.25s;
   }
-  .card:hover { border-color: var(--brass); transform: translateY(-3px); }
+  .card:hover { border-color: var(--acc); transform: translateY(-3px); }
   .card .num {
     font-family: 'IBM Plex Mono', monospace;
-    font-size: 12px;
-    color: var(--brass);
-    letter-spacing: 0.18em;
+    font-size: 11.5px;
+    color: var(--acc);
+    letter-spacing: 0.16em;
   }
-  .card h3 {
-    font-size: 21px;
-    color: var(--parchment);
-    margin: 12px 0 10px;
-    font-weight: 600;
-  }
-  .card p { font-size: 15px; color: var(--text-dim); }
+  .card h3 { font-size: 20px; color: var(--text); margin: 12px 0 10px; font-weight: 600; }
+  .card p { font-size: 15px; color: var(--dim); }
 
-  /* ---------- under the hood ---------- */
-  .hood .arch {
-    margin-top: 48px;
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 22px;
-  }
-  .arch-item {
-    border-left: 2px solid var(--brass-dim);
-    padding: 6px 0 6px 22px;
-  }
-  .arch-item h3 {
-    font-size: 18px;
-    color: var(--parchment);
-    font-weight: 600;
-    margin-bottom: 8px;
-  }
-  .arch-item p { font-size: 14.5px; color: var(--text-dim); }
-  .arch-item .mono { font-size: 12.5px; color: var(--brass); }
+  /* ---- HOOD ---- */
+  .hood { background: linear-gradient(180deg, #122070, #0a1458); }
 
-  /* ascii-style flow diagram */
+  .arch { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; margin-top: 48px; }
+  .arch-item { border-left: 2px solid var(--acc2); padding: 4px 0 4px 22px; }
+  .arch-item h3 { font-size: 17px; color: var(--text); font-weight: 600; margin-bottom: 8px; }
+  .arch-item p { font-size: 14.5px; color: var(--dim); }
+  .arch-item code { font-family: 'IBM Plex Mono', monospace; font-size: 12.5px; color: var(--acc); }
+
   .flow {
-    margin-top: 56px;
-    background: rgba(0,0,0,0.35);
-    border: 1px solid rgba(201,160,80,0.25);
+    margin-top: 52px;
+    background: rgba(0,0,0,0.3);
+    border: 1px solid var(--border);
     border-radius: 6px;
-    padding: 30px 26px;
+    padding: 28px 24px;
     overflow-x: auto;
   }
   .flow pre {
     font-family: 'IBM Plex Mono', monospace;
     font-size: 13px;
-    line-height: 1.75;
-    color: var(--text-dim);
+    line-height: 1.8;
+    color: var(--dim);
     white-space: pre;
   }
-  .flow .hl { color: var(--brass); }
-  .flow .hl2 { color: var(--teal); filter: brightness(1.6); }
+  .flow .hl  { color: var(--acc); }
+  .flow .hl2 { color: #7dd4f8; }
 
-  /* ---------- crew ---------- */
-  .crew { background: var(--ink-2); border-top: 1px solid rgba(201,160,80,0.18); }
-  .crew-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 26px;
-    margin-top: 48px;
-  }
+  /* ---- CREW ---- */
+  .crew { background: linear-gradient(180deg, #0a1458, #0e1a6a); border-top: 1px solid var(--border2); }
+
+  .crew-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 48px; }
   .crew-card {
-    border: 1px solid rgba(201,160,80,0.25);
-    border-radius: 4px;
-    padding: 36px 32px;
-    background: rgba(14,26,43,0.6);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 36px 30px;
+    background: var(--glass);
   }
-  .crew-card.active { border-color: var(--brass); box-shadow: 0 0 40px rgba(201,160,80,0.08); }
+  .crew-card.active { border-color: var(--acc); box-shadow: 0 0 48px rgba(91,159,223,0.1); }
   .crew-card .role {
     font-family: 'IBM Plex Mono', monospace;
-    font-size: 11.5px;
+    font-size: 11px;
     letter-spacing: 0.22em;
     text-transform: uppercase;
-    color: var(--brass);
+    color: var(--acc);
   }
-  .crew-card h3 {
-    font-size: 30px;
-    color: var(--parchment);
-    margin: 12px 0 4px;
-  }
-  .crew-card .named {
-    font-style: italic;
-    font-family: 'Playfair Display', serif;
-    color: var(--text-dim);
-    font-size: 15px;
-    margin-bottom: 16px;
-  }
-  .crew-card p { font-size: 15px; color: var(--text-dim); }
-  .crew-note {
-    margin-top: 30px;
-    font-size: 15px;
-    color: var(--text-dim);
-    max-width: 720px;
-  }
-  .crew-note .mono { color: var(--brass); font-size: 13.5px; }
+  .crew-card h3 { font-size: 30px; color: var(--text); margin: 12px 0 4px; }
+  .crew-card .named { font-style: italic; font-family: 'Playfair Display', serif; color: var(--dim); font-size: 15px; margin-bottom: 16px; }
+  .crew-card p { font-size: 15px; color: var(--dim); }
 
-  /* ---------- stack ---------- */
-  .stack table {
-    width: 100%;
-    margin-top: 44px;
-    border-collapse: collapse;
-    font-size: 15px;
-  }
+  .crew-note { margin-top: 28px; font-size: 15px; color: var(--dim); max-width: 720px; }
+  .crew-note code { font-family: 'IBM Plex Mono', monospace; font-size: 13.5px; color: var(--acc); }
+
+  /* ---- STACK ---- */
+  .stack { background: linear-gradient(180deg, #0e1a6a, #0a1458); border-top: 1px solid var(--border2); }
+
+  .stack table { width: 100%; margin-top: 44px; border-collapse: collapse; font-size: 15px; }
   .stack th {
     text-align: left;
     font-family: 'IBM Plex Mono', monospace;
-    font-size: 11.5px;
+    font-size: 11px;
     letter-spacing: 0.2em;
     text-transform: uppercase;
-    color: var(--brass);
+    color: var(--acc);
     padding: 0 16px 14px 0;
-    border-bottom: 1px solid rgba(201,160,80,0.35);
+    border-bottom: 1px solid var(--border);
     font-weight: 500;
   }
   .stack td {
     padding: 14px 16px 14px 0;
-    border-bottom: 1px solid rgba(201,160,80,0.12);
+    border-bottom: 1px solid var(--border2);
     vertical-align: top;
-    color: var(--text-dim);
+    color: var(--dim);
   }
-  .stack td:first-child { color: var(--parchment); white-space: nowrap; font-weight: 400; }
-  .stack td .mono { font-size: 13px; color: var(--brass); }
+  .stack td:first-child { color: var(--text); white-space: nowrap; font-weight: 400; }
+  .stack td code { font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: var(--acc); }
 
-  /* ---------- footer ---------- */
+  /* ---- FOOTER ---- */
   footer {
-    border-top: 1px solid rgba(201,160,80,0.25);
+    background: #080f40;
+    border-top: 1px solid var(--border);
     padding: 56px 0 64px;
-    background: var(--ink);
   }
-  .foot-grid {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-end;
-    flex-wrap: wrap;
-    gap: 24px;
-  }
-  footer .sig {
-    font-family: 'Playfair Display', serif;
-    font-style: italic;
-    font-size: 18px;
-    color: var(--parchment);
-  }
-  footer .fine {
-    font-family: 'IBM Plex Mono', monospace;
-    font-size: 12px;
-    color: var(--text-dim);
-    letter-spacing: 0.04em;
-  }
-  footer .fine a { color: var(--brass); }
+  .foot-grid { display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: 24px; }
+  footer .sig { font-family: 'Playfair Display', serif; font-style: italic; font-size: 18px; color: var(--text); }
+  footer .fine { font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: var(--dim2); letter-spacing: 0.04em; }
+  footer .fine a { color: var(--acc); }
 
   @media (max-width: 820px) {
     .hero-grid { grid-template-columns: 1fr; }
-    .compass { max-width: 220px; margin-top: 12px; }
+    .compass { max-width: 200px; margin-top: 16px; }
     .crew-grid { grid-template-columns: 1fr; }
     section { padding: 72px 0; }
+    .hero::before, .hero::after { display:none; }
   }
 </style>
 </head>
 <body>
 
-<!-- ======================= HERO ======================= -->
+<!-- HERO -->
 <header class="hero">
   <div class="wrap hero-grid">
     <div>
-      <span class="kicker">A Personal AI Agent · Self-Hosted · Always On</span>
+      <span class="kicker">A Personal AI Agent - Self-Hosted - Always On</span>
       <h1>VERNE</h1>
       <p class="tagline">"An agent for extraordinary voyages."</p>
       <p class="sub">
         Named for Jules Verne, who mapped territories everyone else called unreachable.
         Verne is a persistent, self-hosted AI agent that lives in my messaging apps,
-        remembers everything that matters, and works my business problems
-        like a strategic peer — not a chatbot.
+        remembers everything that matters, and works my business problems like a
+        <strong>strategic peer</strong> - not a chatbot.
       </p>
       <div class="badge-row">
         <span class="badge">Claude Agent SDK</span>
@@ -377,15 +361,14 @@
         <span class="badge">Telegram-Native</span>
         <span class="badge">Runs on My Mac</span>
       </div>
-      <p class="meta">STATUS: <span>OPERATIONAL</span> &nbsp;·&nbsp; PORT OF REGISTRY: <span>RANCHI → SINGAPORE</span></p>
+      <p class="meta">STATUS: <span>OPERATIONAL</span> &nbsp;·&nbsp; PORT OF REGISTRY: <span>RANCHI - SINGAPORE</span></p>
     </div>
 
-    <!-- compass rose -->
     <svg class="compass" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-      <circle cx="100" cy="100" r="96" stroke="#c9a050" stroke-width="1" opacity="0.5"/>
-      <circle cx="100" cy="100" r="84" stroke="#c9a050" stroke-width="0.5" opacity="0.35"/>
-      <circle cx="100" cy="100" r="58" stroke="#c9a050" stroke-width="0.5" opacity="0.35"/>
-      <g stroke="#c9a050" stroke-width="0.5" opacity="0.45">
+      <circle cx="100" cy="100" r="96" stroke="#5b9fdf" stroke-width="1" opacity="0.4"/>
+      <circle cx="100" cy="100" r="84" stroke="#5b9fdf" stroke-width="0.5" opacity="0.25"/>
+      <circle cx="100" cy="100" r="58" stroke="#5b9fdf" stroke-width="0.5" opacity="0.25"/>
+      <g stroke="#5b9fdf" stroke-width="0.5" opacity="0.35">
         <line x1="100" y1="4"   x2="100" y2="16"/>
         <line x1="100" y1="184" x2="100" y2="196"/>
         <line x1="4"   y1="100" x2="16"  y2="100"/>
@@ -395,42 +378,40 @@
         <line x1="32.1" y1="167.9" x2="40.6" y2="159.4"/>
         <line x1="159.4" y1="40.6" x2="167.9" y2="32.1"/>
       </g>
-      <!-- main needle N-S -->
-      <path d="M100 18 L108 100 L100 124 L92 100 Z" fill="#c9a050" opacity="0.9"/>
-      <path d="M100 182 L108 100 L100 124 L92 100 Z" fill="#2e6f6c" opacity="0.7" transform="rotate(180 100 100)"/>
-      <!-- cross needle E-W -->
-      <path d="M18 100 L100 92 L124 100 L100 108 Z" fill="#c9a050" opacity="0.45"/>
-      <path d="M182 100 L100 92 L76 100 L100 108 Z" fill="#c9a050" opacity="0.45"/>
-      <circle cx="100" cy="100" r="7" fill="#0e1a2b" stroke="#c9a050" stroke-width="1.5"/>
-      <text x="100" y="13" text-anchor="middle" fill="#e8e0cd" font-size="11" font-family="Georgia, serif">N</text>
-      <text x="100" y="197" text-anchor="middle" fill="#a9b4c4" font-size="10" font-family="Georgia, serif">S</text>
-      <text x="195" y="104" text-anchor="middle" fill="#a9b4c4" font-size="10" font-family="Georgia, serif">E</text>
-      <text x="5" y="104" text-anchor="middle" fill="#a9b4c4" font-size="10" font-family="Georgia, serif">W</text>
+      <path d="M100 18 L108 100 L100 124 L92 100 Z" fill="#5b9fdf" opacity="0.9"/>
+      <path d="M100 182 L108 100 L100 124 L92 100 Z" fill="#7dd4f8" opacity="0.5" transform="rotate(180 100 100)"/>
+      <path d="M18 100 L100 92 L124 100 L100 108 Z" fill="#5b9fdf" opacity="0.35"/>
+      <path d="M182 100 L100 92 L76 100 L100 108 Z" fill="#5b9fdf" opacity="0.35"/>
+      <circle cx="100" cy="100" r="7" fill="#0a1458" stroke="#5b9fdf" stroke-width="1.5"/>
+      <text x="100" y="13" text-anchor="middle" fill="white" font-size="11" font-family="Georgia, serif">N</text>
+      <text x="100" y="197" text-anchor="middle" fill="rgba(255,255,255,0.5)" font-size="10" font-family="Georgia, serif">S</text>
+      <text x="195" y="104" text-anchor="middle" fill="rgba(255,255,255,0.5)" font-size="10" font-family="Georgia, serif">E</text>
+      <text x="5" y="104" text-anchor="middle" fill="rgba(255,255,255,0.5)" font-size="10" font-family="Georgia, serif">W</text>
     </svg>
   </div>
 </header>
 
-<!-- ======================= QUOTE ======================= -->
+<!-- QUOTE -->
 <div class="quote-band">
   <div class="wrap">
     <blockquote>
       "Anything one man can imagine, other men can make real."
-      <cite>— Jules Verne, 1828–1905</cite>
+      <cite>Jules Verne, 1828-1905</cite>
     </blockquote>
   </div>
 </div>
 
-<!-- ======================= THE IDEA ======================= -->
+<!-- THE IDEA -->
 <section class="idea">
   <div class="wrap">
-    <span class="kicker">Chapter I — The Idea</span>
+    <span class="kicker">Chapter I - The Idea</span>
     <h2>Why build your own agent?</h2>
     <div class="rule"></div>
     <p class="lead">
       Every AI assistant I tried forgot me the moment the chat window closed.
       Verne doesn't. He runs continuously on my own machine, holds a growing
       knowledge graph of my work and priorities, and reaches me where I already
-      am — my messaging apps.
+      am - my messaging apps.
     </p>
     <div class="body">
       <p>
@@ -440,7 +421,7 @@
         can self-host a daily-driver AI agent, so can a founder.
       </p>
       <p>
-        Verne is my implementation of that idea — extended with persistent semantic
+        Verne is my implementation of that idea - extended with persistent semantic
         memory, document integrations, and a two-agent architecture that separates
         business from personal life while sharing one brain.
       </p>
@@ -448,69 +429,67 @@
   </div>
 </section>
 
-<!-- ======================= VOYAGES / CAPABILITIES ======================= -->
+<!-- VOYAGES -->
 <section class="voyages">
   <div class="wrap">
-    <span class="kicker">Chapter II — The Voyages</span>
+    <span class="kicker">Chapter II - The Voyages</span>
     <h2>What Verne does</h2>
     <div class="rule"></div>
-
     <div class="cards">
       <div class="card">
         <span class="num">VOYAGE 01</span>
         <h3>Strategic Sparring</h3>
-        <p>Business strategy, positioning, and decision support — with a persona
+        <p>Business strategy, positioning, and decision support - with a persona
         tuned to challenge assumptions and push back. No flattery, no filler.
         Truth over comfort is written into his system prompt.</p>
       </div>
       <div class="card">
         <span class="num">VOYAGE 02</span>
         <h3>Memory That Compounds</h3>
-        <p>A semantic knowledge graph (mnemon) stores facts, decisions, contacts,
-        and timelines after every conversation — and recalls them before each reply.
+        <p>A semantic knowledge graph stores facts, decisions, contacts,
+        and timelines after every conversation - and recalls them before each reply.
         Embeddings run locally via Ollama. Nothing leaves the machine.</p>
       </div>
       <div class="card">
         <span class="num">VOYAGE 03</span>
-        <h3>Documents &amp; Mail</h3>
+        <h3>Documents and Mail</h3>
         <p>Reads and writes Google Docs through custom MCP tools, keeps a running
-        "Verne Notes" document, and drafts email in my voice — with a hard rule:
+        "Verne Notes" document, and drafts email in my voice - with a hard rule:
         nothing is ever sent without explicit confirmation.</p>
       </div>
       <div class="card">
         <span class="num">VOYAGE 04</span>
         <h3>Always Within Reach</h3>
-        <p>Lives on Telegram (with WhatsApp wiring). Send a voice note from
-        anywhere; he transcribes it, confirms what he heard, and acts.
-        Each conversation runs in its own isolated Docker container.</p>
+        <p>Lives on Telegram. Send a voice note from anywhere; he transcribes it,
+        confirms what he heard, and acts. Each conversation runs in its own
+        isolated Docker container.</p>
       </div>
       <div class="card">
         <span class="num">VOYAGE 05</span>
         <h3>Professional Writing</h3>
-        <p>Cover letters, LinkedIn posts, proposals, government submissions —
+        <p>Cover letters, LinkedIn posts, proposals, government submissions -
         drafted in my register, not generic AI prose. The persona file encodes
-        voice, format rules, and per-channel formatting (yes, WhatsApp bold
-        is one asterisk).</p>
+        voice, format rules, and per-channel formatting conventions.</p>
       </div>
       <div class="card">
         <span class="num">VOYAGE 06</span>
         <h3>Deadline Watch</h3>
         <p>Tracks trademark filings, follow-ups, and time-sensitive windows.
-        Scheduled tasks run on cron inside the host — a morning briefing lands
-        before I'm out of bed.</p>
+        Scheduled tasks run on cron inside the host - a morning briefing lands
+        before I am out of bed.</p>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ======================= UNDER THE HOOD ======================= -->
+<!-- UNDER THE HOOD -->
 <section class="hood">
   <div class="wrap">
-    <span class="kicker">Chapter III — The Engine Room</span>
+    <span class="kicker">Chapter III - The Engine Room</span>
     <h2>Under the hood</h2>
     <div class="rule"></div>
-    <p style="max-width:720px; color:var(--text-dim); font-size:16.5px;">
-      Verne runs on <strong style="color:var(--parchment)">NanoClaw v2</strong> — an
+    <p style="max-width:720px; color:var(--dim); font-size:16.5px; line-height:1.75;">
+      Verne runs on <strong style="color:var(--text); font-weight:600;">NanoClaw v2</strong> - an
       open-source personal-agent framework with a deliberately spartan design philosophy:
       a single Node.js host process, per-session Docker containers, and SQLite files as
       the only interface between them. <em>Everything is a message.</em>
@@ -518,114 +497,114 @@
 
     <div class="arch">
       <div class="arch-item">
-        <h3>Host ↔ Container Split</h3>
+        <h3>Host and Container Split</h3>
         <p>A Node host routes platform messages; each agent session gets an isolated
-        Bun-runtime Docker container running the <span class="mono">Claude Agent SDK</span>.
-        Containers are ephemeral — killed and respawned freely.</p>
+        Bun-runtime Docker container running the <code>Claude Agent SDK</code>.
+        Containers are ephemeral - killed and respawned freely.</p>
       </div>
       <div class="arch-item">
         <h3>Two-Database Message Bus</h3>
-        <p>No IPC, no sockets between host and agent. Each session has
-        <span class="mono">inbound.db</span> (host writes, agent reads) and
-        <span class="mono">outbound.db</span> (agent writes, host reads).
-        One writer per file. Even/odd sequence numbers. That's the whole protocol.</p>
+        <p>No IPC between host and agent. Each session has
+        <code>inbound.db</code> (host writes, agent reads) and
+        <code>outbound.db</code> (agent writes, host reads).
+        One writer per file. Even/odd sequence numbers. That is the whole protocol.</p>
       </div>
       <div class="arch-item">
         <h3>Semantic Memory Layer</h3>
-        <p><span class="mono">mnemon</span> — a Go-based SQLite knowledge graph —
+        <p><code>mnemon</code> - a Go-based SQLite knowledge graph -
         hooks into the agent's turn lifecycle: recall before responding, store after.
-        Embeddings via <span class="mono">nomic-embed-text</span> on local Ollama.</p>
+        Embeddings via <code>nomic-embed-text</code> on local Ollama.</p>
       </div>
       <div class="arch-item">
         <h3>Zero-Credential Containers</h3>
         <p>API keys and OAuth tokens never enter the agent container. A
-        <span class="mono">OneCLI</span> gateway proxies outbound HTTPS and injects
-        credentials at request time — Google APIs are called with plain
-        <span class="mono">fetch()</span>, no SDK, no stored token.</p>
+        <code>OneCLI</code> gateway proxies outbound HTTPS and injects
+        credentials at request time - Google APIs are called with plain
+        <code>fetch()</code>, no SDK, no stored token.</p>
       </div>
       <div class="arch-item">
         <h3>Persona as Code</h3>
-        <p>Each agent group is a folder with its own <span class="mono">CLAUDE.md</span> —
+        <p>Each agent group is a folder with its own <code>CLAUDE.md</code> -
         identity, focus areas, behavioral rules, formatting constraints. Verne's
         character is a version-controlled text file, not a fine-tune.</p>
       </div>
       <div class="arch-item">
         <h3>Custom MCP Tools</h3>
         <p>Google Docs integration is four hand-rolled MCP tools
-        (<span class="mono">list / read / append / create</span>) speaking directly
-        to the REST API through the credential proxy — about 300 lines of TypeScript.</p>
+        (<code>list / read / append / create</code>) speaking directly
+        to the REST API through the credential proxy - about 300 lines of TypeScript.</p>
       </div>
     </div>
 
     <div class="flow">
 <pre>
  <span class="hl2">Telegram / WhatsApp</span>
-        │
-        ▼
- ┌────────────────┐    writes     ┌──────────────┐
- │  NanoClaw Host │ ────────────► │  inbound.db  │
- │   (Node.js)    │               └──────┬───────┘
- └───────▲────────┘                      │ polls
-         │                               ▼
-         │                 ┌──────────────────────────┐
-         │                 │   Agent Container (Bun)  │
-         │                 │  <span class="hl">Claude Agent SDK</span>        │
-         │                 │  mnemon memory hooks     │
-         │                 │  MCP tools (Docs, …)     │
-         │                 └────────────┬─────────────┘
-         │ polls                        │ writes
- ┌───────┴───────┐                      ▼
- │  delivery →   │               ┌──────────────┐
- │  back to chat │ ◄──────────── │ outbound.db  │
- └───────────────┘               └──────────────┘
+        |
+        v
+ +----------------+    writes     +--------------+
+ |  NanoClaw Host | ------------> |  inbound.db  |
+ |   (Node.js)    |               +------+-------+
+ +-------^--------+                      | polls
+         |                               v
+         |                 +---------------------------+
+         |                 |   Agent Container (Bun)   |
+         |                 |  <span class="hl">Claude Agent SDK</span>         |
+         |                 |  mnemon memory hooks      |
+         |                 |  MCP tools (Docs, ...)    |
+         |                 +------------+--------------+
+         | polls                        | writes
+ +-------+-------+                      v
+ |  delivery ->  |               +--------------+
+ |  back to chat | <------------ | outbound.db  |
+ +---------------+               +--------------+
 
- credentials:  container ── HTTPS ──► <span class="hl">OneCLI proxy</span> ──► Google / APIs
+ credentials:  container -- HTTPS --> <span class="hl">OneCLI proxy</span> --> Google / APIs
                (keys injected at request time, never stored in container)
 </pre>
     </div>
   </div>
 </section>
 
-<!-- ======================= THE CREW ======================= -->
+<!-- THE CREW -->
 <section class="crew">
   <div class="wrap">
-    <span class="kicker">Chapter IV — The Crew</span>
+    <span class="kicker">Chapter IV - The Crew</span>
     <h2>Two agents, one brain</h2>
     <div class="rule"></div>
 
     <div class="crew-grid">
       <div class="crew-card active">
-        <span class="role">Business · Strategy · Writing</span>
+        <span class="role">Business - Strategy - Writing</span>
         <h3>Verne</h3>
-        <p class="named">after Jules Verne — who charted the unreachable</p>
+        <p class="named">after Jules Verne - who charted the unreachable</p>
         <p>The strategic peer. Handles ventures, positioning, professional writing,
         IP deadlines, and ecosystem strategy. Opinionated by design: his persona
         file instructs him to challenge framing, flag cold pursuits, and never
         open with "Great question!"</p>
       </div>
       <div class="crew-card">
-        <span class="role">Personal · Logistics · Daily Rhythm</span>
-        <h3>Lumière</h3>
-        <p class="named">after the Lumière brothers — who lit up everyday life</p>
+        <span class="role">Personal - Logistics - Daily Rhythm</span>
+        <h3>Lumiere</h3>
+        <p class="named">after the Lumiere brothers - who lit up everyday life</p>
         <p>The trusted EA. Morning briefings at 7:30 sharp, travel logistics,
-        to-do tracking, quick capture to notes. Warm but precise — built to be
+        to-do tracking, quick capture to notes. Warm but precise - built to be
         steady when the day isn't.</p>
       </div>
     </div>
 
     <p class="crew-note">
-      Both agents run as separate NanoClaw agent groups — separate containers, separate
-      personas, separate channel wirings — but query the <span class="mono">same mnemon
-      knowledge graph</span>. What Verne learns about shifting priorities surfaces for
-      Lumière's planning, and vice versa. Separation of concerns; unity of context.
+      Both agents run as separate NanoClaw agent groups - separate containers, separate
+      personas, separate channel wirings - but query the <code>same mnemon
+      knowledge graph</code>. What Verne learns about shifting priorities surfaces for
+      Lumiere's planning, and vice versa. Separation of concerns; unity of context.
     </p>
   </div>
 </section>
 
-<!-- ======================= STACK ======================= -->
+<!-- STACK -->
 <section class="stack">
   <div class="wrap">
-    <span class="kicker">Chapter V — The Manifest</span>
+    <span class="kicker">Chapter V - The Manifest</span>
     <h2>Technical manifest</h2>
     <div class="rule"></div>
 
@@ -636,52 +615,52 @@
       <tbody>
         <tr>
           <td>Agent framework</td>
-          <td><span class="mono">NanoClaw v2</span></td>
+          <td><code>NanoClaw v2</code></td>
           <td>Open-source, minimal, auditable. Single host process + ephemeral containers.</td>
         </tr>
         <tr>
           <td>Reasoning</td>
-          <td><span class="mono">Claude Agent SDK</span> (Anthropic)</td>
-          <td>Full agentic loop — tools, file workspace, scheduled tasks — inside the container.</td>
+          <td><code>Claude Agent SDK</code> (Anthropic)</td>
+          <td>Full agentic loop - tools, file workspace, scheduled tasks - inside the container.</td>
         </tr>
         <tr>
           <td>Host runtime</td>
-          <td><span class="mono">Node.js + TypeScript + pnpm</span></td>
+          <td><code>Node.js + TypeScript + pnpm</code></td>
           <td>Routing, channel adapters, delivery, scheduling, approvals.</td>
         </tr>
         <tr>
           <td>Agent runtime</td>
-          <td><span class="mono">Bun</span> in Docker</td>
+          <td><code>Bun</code> in Docker</td>
           <td>Fast cold starts for per-session containers; bun:sqlite for the message bus.</td>
         </tr>
         <tr>
           <td>Message bus</td>
-          <td><span class="mono">SQLite × 2 per session</span></td>
+          <td><code>SQLite x 2 per session</code></td>
           <td>One writer per file, no lock contention, fully inspectable with a single query.</td>
         </tr>
         <tr>
           <td>Memory</td>
-          <td><span class="mono">mnemon + Ollama (nomic-embed-text)</span></td>
+          <td><code>mnemon + Ollama (nomic-embed-text)</code></td>
           <td>Local semantic knowledge graph. Recall-before, store-after, on every turn.</td>
         </tr>
         <tr>
           <td>Credentials</td>
-          <td><span class="mono">OneCLI gateway</span></td>
+          <td><code>OneCLI gateway</code></td>
           <td>Request-time secret injection. The agent container never holds a key.</td>
         </tr>
         <tr>
           <td>Channels</td>
-          <td><span class="mono">Telegram (Chat SDK) · WhatsApp (Baileys)</span></td>
+          <td><code>Telegram (Chat SDK) · WhatsApp (Baileys)</code></td>
           <td>Meet the user where they already are. Voice notes included.</td>
         </tr>
         <tr>
           <td>Integrations</td>
-          <td><span class="mono">Google Docs · Gmail · Apple Notes</span></td>
-          <td>Custom MCP tools over REST — no heavyweight SDKs in the container.</td>
+          <td><code>Google Docs · Gmail · Apple Notes</code></td>
+          <td>Custom MCP tools over REST - no heavyweight SDKs in the container.</td>
         </tr>
         <tr>
           <td>Hardware</td>
-          <td><span class="mono">MacBook (Apple Silicon)</span></td>
+          <td><code>MacBook (Apple Silicon)</code></td>
           <td>Self-hosted. The agent, its memory, and its data never leave my machine.</td>
         </tr>
       </tbody>
@@ -689,18 +668,18 @@
   </div>
 </section>
 
-<!-- ======================= FOOTER ======================= -->
+<!-- FOOTER -->
 <footer>
   <div class="wrap foot-grid">
     <div>
-      <p class="sig">"The sea is everything." — Captain Nemo</p>
+      <p class="sig">"The sea is everything." - Captain Nemo</p>
       <p class="fine" style="margin-top:14px;">
         Built by Nivedita Pande · <a href="https://dendrons.ai" rel="noopener">Dendrons.ai</a>
       </p>
     </div>
     <p class="fine">
       VERNE · personal agent project · NanoClaw / Claude Agent SDK / mnemon<br>
-      A demonstration of self-hosted agentic AI — part of the Dendrons.ai portfolio.
+      A demonstration of self-hosted agentic AI - part of the Dendrons.ai portfolio.
     </p>
   </div>
 </footer>
