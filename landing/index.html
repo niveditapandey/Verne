@@ -350,15 +350,15 @@
       <p class="tagline">"An agent for extraordinary voyages."</p>
       <p class="sub">
         Named after Jules Verne, who mapped territories everyone else called unreachable.
-        Verne is a persistent, self-hosted AI agent that lives in my messaging apps,
-        remembers everything that matters, and works my business problems like a
+        Verne is a persistent, self-hosted AI agent that lives in my messaging apps
+        and works my business problems like a
         <strong>strategic peer</strong> - not a chatbot.
       </p>
       <div class="badge-row">
         <span class="badge">Claude Agent SDK</span>
         <span class="badge">NanoClaw v2</span>
-        <span class="badge">Knowledge Graph Memory</span>
-        <span class="badge">Telegram-Native</span>
+        <span class="badge">Telegram + WhatsApp</span>
+        <span class="badge">Self-Hosted</span>
         <span class="badge">Runs on My Mac</span>
       </div>
       <p class="meta">STATUS: <span>OPERATIONAL</span> &nbsp;·&nbsp; PORT OF REGISTRY: <span>INDIA - SINGAPORE</span></p>
@@ -409,9 +409,9 @@
     <div class="rule"></div>
     <p class="lead">
       Every AI assistant I tried forgot me the moment the chat window closed.
-      Verne doesn't. He runs continuously on my own machine, holds a growing
-      knowledge graph of my work and priorities, and reaches me where I already
-      am - my messaging apps.
+      Verne runs continuously on my own machine and reaches me where I already
+      am - my messaging apps. Built with a memory layer designed to carry context
+      across conversations, not just within them.
     </p>
     <div class="body">
       <p>
@@ -421,9 +421,9 @@
         can self-host a daily-driver AI agent, so can a founder.
       </p>
       <p>
-        Verne is my implementation of that idea - extended with persistent semantic
-        memory, document integrations, and a two-agent architecture that separates
-        business from personal life while sharing one brain.
+        Verne is my implementation of that idea - extended with a memory layer,
+        document integrations in the pipeline, and a two-agent architecture designed
+        to separate business from personal life while sharing one brain.
       </p>
     </div>
   </div>
@@ -445,24 +445,24 @@
       </div>
       <div class="card">
         <span class="num">VOYAGE 02</span>
-        <h3>Memory That Compounds</h3>
-        <p>A semantic knowledge graph stores facts, decisions, contacts,
-        and timelines after every conversation - and recalls them before each reply.
-        Embeddings run locally via Ollama. Nothing leaves the machine.</p>
+        <h3>Memory Layer</h3>
+        <p>Built with mnemon - a semantic knowledge graph designed to store facts,
+        decisions, contacts, and timelines across conversations. Embeddings run
+        locally via Ollama. Nothing leaves the machine.</p>
       </div>
       <div class="card">
         <span class="num">VOYAGE 03</span>
         <h3>Documents and Mail</h3>
-        <p>Reads and writes Google Docs through custom MCP tools, keeps a running
-        "Verne Notes" document, and drafts email in my voice - with a hard rule:
-        nothing is ever sent without explicit confirmation.</p>
+        <p>Custom MCP tools for Google Docs and Gmail are built into the architecture -
+        designed to read, write, and draft in my voice. Hard rule regardless of
+        integration: nothing is ever sent without explicit confirmation.</p>
       </div>
       <div class="card">
         <span class="num">VOYAGE 04</span>
         <h3>Always Within Reach</h3>
-        <p>Lives on Telegram. Send a voice note from anywhere; he transcribes it,
-        confirms what he heard, and acts. Each conversation runs in its own
-        isolated Docker container.</p>
+        <p>Lives on Telegram and WhatsApp - wherever the conversation already is.
+        Each message runs in its own isolated Docker container. No app to open,
+        no context to re-establish.</p>
       </div>
       <div class="card">
         <span class="num">VOYAGE 05</span>
@@ -583,12 +583,12 @@
         open with "Great question!"</p>
       </div>
       <div class="crew-card">
-        <span class="role">Personal - Logistics - Daily Rhythm</span>
+        <span class="role" style="opacity:0.6">Personal - Logistics - Daily Rhythm &nbsp;·&nbsp; In Development</span>
         <h3>Lumiere</h3>
         <p class="named">after the Lumiere brothers - who lit up everyday life</p>
-        <p>The trusted EA. Morning briefings at 7:30 sharp, travel logistics,
-        to-do tracking, quick capture to notes. Warm but precise - built to be
-        steady when the day isn't.</p>
+        <p>The trusted EA. Morning briefings, travel logistics, to-do tracking,
+        quick capture to notes. Warm but precise - designed to be steady when
+        the day isn't. Coming next.</p>
       </div>
     </div>
 
@@ -641,7 +641,7 @@
         <tr>
           <td>Memory</td>
           <td><code>mnemon + Ollama (nomic-embed-text)</code></td>
-          <td>Local semantic knowledge graph. Recall-before, store-after, on every turn.</td>
+          <td>Local semantic knowledge graph, installed and wired. Recall-before, store-after design.</td>
         </tr>
         <tr>
           <td>Credentials</td>
@@ -655,7 +655,7 @@
         </tr>
         <tr>
           <td>Integrations</td>
-          <td><code>Google Docs · Gmail · Apple Notes</code></td>
+          <td><code>Google Docs · Gmail</code></td>
           <td>Custom MCP tools over REST - no heavyweight SDKs in the container.</td>
         </tr>
         <tr>
