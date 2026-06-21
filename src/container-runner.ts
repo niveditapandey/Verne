@@ -310,6 +310,12 @@ function buildMounts(
   // skill symlinks)
   mounts.push({ hostPath: claudeDir, containerPath: '/home/node/.claude', readonly: false });
 
+  // Per-agent-group mnemon knowledge graph — persisted across container restarts.
+  // Without this mount the data dir is ephemeral and all memories evaporate on exit.
+  const mnemDir = path.join(DATA_DIR, 'v2-sessions', agentGroup.id, '.mnemon');
+  fs.mkdirSync(mnemDir, { recursive: true });
+  mounts.push({ hostPath: mnemDir, containerPath: '/home/node/.mnemon', readonly: false });
+
   // Shared agent-runner source — read-only, same code for all groups.
   const agentRunnerSrc = path.join(projectRoot, 'container', 'agent-runner', 'src');
   mounts.push({ hostPath: agentRunnerSrc, containerPath: '/app/src', readonly: true });
@@ -411,6 +417,22 @@ async function buildContainerArgs(
   // Everything NanoClaw-specific is in container.json (read by runner at startup).
   args.push('-e', `TZ=${TIMEZONE}`);
 
+  // Google Cloud project + location — always passed so the Gemini provider can
+  // construct the Vertex AI endpoint. On GCE the container authenticates via the
+  // VM's service account (metadata server); on laptop the ADC file is mounted too.
+  const gcpProject = process.env.GOOGLE_CLOUD_PROJECT || 'dendrons-steward';
+  args.push('-e', `GOOGLE_CLOUD_PROJECT=${gcpProject}`);
+  args.push('-e', `GOOGLE_CLOUD_LOCATION=${process.env.GOOGLE_CLOUD_LOCATION || 'us-central1'}`);
+  const adcPath = path.join(process.env.HOME || '/root', '.config', 'gcloud', 'application_default_credentials.json');
+  if (fs.existsSync(adcPath)) {
+    mounts.push({ hostPath: adcPath, containerPath: '/workspace/gcloud-adc.json', readonly: true });
+    args.push('-e', 'GOOGLE_APPLICATION_CREDENTIALS=/workspace/gcloud-adc.json');
+  }
+
+  // Gmail App Password — for send_gmail MCP tool (SMTP via curl).
+  if (process.env.GMAIL_USER) args.push('-e', `GMAIL_USER=${process.env.GMAIL_USER}`);
+  if (process.env.GMAIL_APP_PASSWORD) args.push('-e', `GMAIL_APP_PASSWORD=${process.env.GMAIL_APP_PASSWORD}`);
+
   // Provider-contributed env vars (e.g. XDG_DATA_HOME, OPENCODE_*, NO_PROXY).
   if (providerContribution.env) {
     for (const [key, value] of Object.entries(providerContribution.env)) {
@@ -423,14 +445,18 @@ async function buildContainerArgs(
   // a transient hard failure: if we can't wire the gateway, we don't spawn.
   // The caller (router or host-sweep) catches the throw, leaves the inbound
   // message pending, and the next sweep tick retries.
-  if (agentIdentifier) {
-    await onecli.ensureAgent({ name: agentGroup.name, identifier: agentIdentifier });
+  if (ONECLI_URL) {
+    if (agentIdentifier) {
+      await onecli.ensureAgent({ name: agentGroup.name, identifier: agentIdentifier });
+    }
+    const onecliApplied = await onecli.applyContainerConfig(args, { addHostMapping: false, agent: agentIdentifier });
+    if (!onecliApplied) {
+      throw new Error('OneCLI gateway not applied — refusing to spawn container without credentials');
+    }
+    log.info('OneCLI gateway applied', { containerName });
+  } else {
+    log.info('OneCLI not configured, skipping gateway', { containerName });
   }
-  const onecliApplied = await onecli.applyContainerConfig(args, { addHostMapping: false, agent: agentIdentifier });
-  if (!onecliApplied) {
-    throw new Error('OneCLI gateway not applied — refusing to spawn container without credentials');
-  }
-  log.info('OneCLI gateway applied', { containerName });
 
   // Host gateway
   args.push(...hostGatewayArgs());

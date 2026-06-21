@@ -11,6 +11,14 @@
 
 set -e
 
+# Register Claude Code hooks for pre-turn recall and post-turn memory storage.
+# Idempotent — safe to run on every container start. Non-fatal: a memory-setup
+# failure must never prevent the agent from processing messages.
+if command -v mnemon >/dev/null 2>&1; then
+  mnemon setup --target claude-code --yes --global >/dev/stderr 2>&1 \
+    || echo "[entrypoint] mnemon setup failed — continuing without memory hooks" >&2
+fi
+
 cat > /tmp/input.json
 
 exec bun run /app/src/index.ts < /tmp/input.json
